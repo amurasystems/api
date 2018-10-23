@@ -4,7 +4,7 @@
 
 List available slots.
 
-Authentication: public
+Authentication: public or private depending on the tenant configuration
 
 | Argument | Type     | Required | Description |
 |----------|----------|----------|-------------|
@@ -15,9 +15,9 @@ Authentication: public
 Example:
 
 ```bash
-curl https://demo.golfmanager.es/amura/consumerbookings/searchAvailability.api \
- -d start="2018-11-09 10:00" \
- -d end="2018-11-09 12:00" \
+curl https://test.golfmanager.es/amura/ebookings/searchAvailability.api \
+ -d start="2018-10-23T16:20:00.000Z" \
+ -d end="2018-10-23T17:20:00.000Z" \
  -d slots=2
 ```
 
@@ -45,7 +45,7 @@ Example:
     "multiple": null,
     "name": "Green Fee 18 hoyos",
     "price": 50,
-    "start": "2018-09-09T10:00:00+02:00"
+    "start": "2018-11-09T10:00:00+02:00"
   },
   {
     "id": 3,
@@ -54,7 +54,7 @@ Example:
     "multiple": null,
     "name": "Green Fee 9 hoyos",
     "price": 35,
-    "start": "2018-09-09T10:00:00+02:00"
+    "start": "2018-11-09T10:00:00+02:00"
   },
   {
     "id": 33,
@@ -63,7 +63,46 @@ Example:
     "multiple": 2,
     "name": "Pack 2 GF+ Buggy",
     "price": 59,
-    "start": "2018-09-09T10:00:00+02:00"
+    "start": "2018-11-09T10:00:00+02:00"
   }
 ]
+```
+
+
+
+## makeReservation
+
+Make a reservation. The reservation needs to be confirmed before a period of time configured by the tenant. After that it will be automatically released.
+
+Authentication: public or private depending on the tenant configuration
+
+Arguments: an array of reservation objects. Each reservations must specify:
+
+| Argument | Type     | Required | Description |
+|----------|----------|----------|-------------|
+| type       | int         | yes      | The id obtained from searchAvailability  |
+| start       | datetime      | yes      | The date of this slot  |
+
+Example:
+
+```bash
+curl https://test.golfmanager.es/amura/ebookings/makeReservation.api \
+ -d 'reservations=[{"idType":3,"start":"2018-11-09T08:20:00.000Z"}]'
+```
+
+Response:
+
+Return the sale information to complete the payment if it needs to be prepaid 
+
+Example:
+
+```json
+{  
+   "cart":{  
+      "idSale":5448,
+      "quantity":1,
+      "total":10,
+      "units":1
+   }
+}
 ```
