@@ -106,3 +106,29 @@ Example:
    }
 }
 ```
+
+
+
+
+
+Golfmanager's API Terms of Service
+---
+
+- Thank you for using Golfmanager! When you develop on the Golfmanager Platform,
+you agree to be bound by the following terms, so please read them carefully. 
+
+- The API is provided as-is and without any warranty whatsoever. Golfmanager is not liable for any 
+damage due to unavailable or incorrect APIs.
+
+- Whilst Golfmanager uses all reasonable endeavours to correct any errors or omissions on the
+Golfmanager Platform as soon as practicable once they have been brought to Golfmanager's
+attention, Golfmanager makes no promises, guarantees, representations or warranties of
+any kind whatsoever (express or implied).
+
+- Abuse or excessively frequent requests to Golfmanager via the API may result in 
+the temporary or permanent suspension of your Account's access to the API. Golfmanager,
+in our sole discretion, will determine abuse or excessive usage of the API. We will make
+a reasonable attempt to warn you via email prior to suspension.
+
+- Golfmanager has the right to change these General API Terms and Conditions and 
+any Specific API Terms and Conditions.
