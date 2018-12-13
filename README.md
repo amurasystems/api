@@ -107,9 +107,176 @@ Example:
 }
 ```
 
+## getClients
 
+List clients
 
+Authentication: public or private depending on the tenant configuration
 
+| Argument | Type     | Required | Description |
+|----------|----------|----------|-------------|
+| search   | string   | no       | Search clients by text |
+| limit    | int      | no       | Limit the number of clients (default is 100)   |
+
+Example:
+
+```bash
+curl https://test.golfmanager.es/gmr/api/getClients.api \
+ -d search="a" \
+ -d limit=500
+```
+
+Response:
+
+Return a list of clients:
+
+| Argument | Type     | Description |
+|----------|----------|-------------|
+| id          | int          | The client id |
+| name        | string       | The client name  |
+| email       | string       | The client email  |
+
+Example:
+
+```json
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "email": "johndoe@test.com"
+  },
+  {
+    "id": 2,
+    "name": "Jane Doe",
+    "email": "janedoe@test.com"
+  }
+]
+```
+
+## getProducts
+
+List products
+
+Authentication: public or private depending on the tenant configuration
+
+| Argument | Type     | Required | Description |
+|----------|----------|----------|-------------|
+| search   | string   | no       | Search products by text |
+| limit    | int      | no       | Limit the number of products (default is 100)   |
+
+Example:
+
+```bash
+curl https://test.golfmanager.es/gmr/api/getProducts.api \
+ -d search="a" \
+ -d limit=500
+```
+
+Response:
+
+Return a list of products:
+
+| Argument | Type     | Description |
+|----------|----------|-------------|
+| id          | int          | The product id |
+| name        | string       | The product name  |
+
+Example:
+
+```json
+[
+  {
+    "id": 1,
+    "name": "Test product"
+  },
+  {
+    "id": 2,
+    "name": "Test product 2"
+  }
+]
+```
+
+## newSale
+
+Creates new sale
+
+Authentication: public or private depending on the tenant configuration
+
+| Argument | Type     | Required | Description |
+|----------|----------|----------|-------------|
+| idProduct   | int   | yes      | The product id |
+| idClient    | int   | yes      | The client id  |
+| parentName  | int   | yes      | Referer name   |
+| idParent    | int   | yes      | Referer id     |
+
+Example:
+
+```bash
+curl https://test.golfmanager.es/gmr/api/newSale.api \
+ -d idProduct=1 \
+ -d idClient=1 \
+ -d parentName="Test platform" \
+ -d idParent=1
+```
+
+Response:
+
+Return SaleLine id:
+
+| Argument    | Type     | Description |
+|-------------|----------|-------------|
+| saleLineId  | int      | The SaleLine id |
+
+Example:
+
+```json
+[
+  {
+    "saleLineId": 1
+  },
+  {
+    "saleLineId": 2
+  }
+]
+```
+
+## cancelSales
+
+Cancel multiple sales
+
+Authentication: public or private depending on the tenant configuration
+
+| Argument    | Type     | Required | Description |
+|-------------|----------|----------|-------------|
+| idSaleLines | int[]    | yes      | Array with the saleline ids |
+
+Example:
+
+```bash
+curl https://test.golfmanager.es/gmr/api/cancelSales.api \
+ -d idSaleLines=[1,2,3] 
+```
+
+## setOccupation
+
+Block slots in the occupation table 
+
+Authentication: public or private depending on the tenant configuration
+
+| Argument    | Type     | Required | Description |
+|-------------|----------|----------|-------------|
+| idResource  | int      | yes      | The resource id                            |
+| start       | datetime | yes      | UTC initial date and inital hour for blocking slots |
+| end         | datetime | yes      | UTC end hour for searching slots availability       |
+
+Example:
+
+```bash
+curl https://test.golfmanager.es/gmr/api/setOccupation.api \
+ -d idResource=1 \
+ -d start="2018-12-14T08:00:00+01:00" \
+ -d end="2018-12-14T18:00:00+01:00" \
+```
 
 Golfmanager's API Terms of Service
 ---
