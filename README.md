@@ -265,9 +265,9 @@ Authentication: public or private depending on the tenant configuration
 
 | Argument    | Type     | Required | Description |
 |-------------|----------|----------|-------------|
-| idResource  | int      | yes      | The resource id                            |
-| start       | datetime | yes      | UTC initial date and inital hour for blocking slots |
-| end         | datetime | yes      | UTC end hour for searching slots availability       |
+| idResource  | int      | yes      | The resource id                                              |
+| start       | datetime | yes      | UTC initial date and inital hour for blocking slots          |
+| end         | datetime | yes      | UTC end data and end hour for searching slots availability   |
 
 Example:
 
