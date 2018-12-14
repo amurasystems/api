@@ -111,10 +111,11 @@ Example:
 
 List clients
 
-Authentication: public or private depending on the tenant configuration
+Authentication: private
 
 | Argument | Type     | Required | Description |
 |----------|----------|----------|-------------|
+| tenant   | string   | yes      | Club name              |
 | search   | string   | no       | Search clients by text |
 | limit    | int      | no       | Limit the number of clients (default is 100)   |
 
@@ -122,8 +123,9 @@ Example:
 
 ```bash
 curl https://test.golfmanager.es/gmr/api/getClients.api \
+ -d tenant="test" \
  -d search="a" \
- -d limit=500
+ -d limit="500"
 ```
 
 Response:
@@ -157,10 +159,11 @@ Example:
 
 List products
 
-Authentication: public or private depending on the tenant configuration
+Authentication: private
 
 | Argument | Type     | Required | Description |
 |----------|----------|----------|-------------|
+| tenant   | string   | yes      | Club name              |
 | search   | string   | no       | Search products by text |
 | limit    | int      | no       | Limit the number of products (default is 100)   |
 
@@ -169,7 +172,7 @@ Example:
 ```bash
 curl https://test.golfmanager.es/gmr/api/getProducts.api \
  -d search="a" \
- -d limit=500
+ -d limit="500"
 ```
 
 Response:
@@ -200,10 +203,11 @@ Example:
 
 Creates new sale
 
-Authentication: public or private depending on the tenant configuration
+Authentication: private
 
 | Argument | Type     | Required | Description |
 |----------|----------|----------|-------------|
+| tenant      | string| yes      | Club name      |
 | idProduct   | int   | yes      | The product id |
 | idClient    | int   | yes      | The client id  |
 | parentName  | int   | yes      | Referer name   |
@@ -213,10 +217,10 @@ Example:
 
 ```bash
 curl https://test.golfmanager.es/gmr/api/newSale.api \
- -d idProduct=1 \
- -d idClient=1 \
+ -d idProduct="1" \
+ -d idClient="1" \
  -d parentName="Test platform" \
- -d idParent=1
+ -d idParent="1"
 ```
 
 Response:
@@ -244,27 +248,29 @@ Example:
 
 Cancel multiple sales
 
-Authentication: public or private depending on the tenant configuration
+Authentication: private
 
 | Argument    | Type     | Required | Description |
 |-------------|----------|----------|-------------|
+| tenant      | string   | yes      | Club name                   |
 | idSaleLines | int[]    | yes      | Array with the saleline ids |
 
 Example:
 
 ```bash
 curl https://test.golfmanager.es/gmr/api/cancelSales.api \
- -d idSaleLines=[1,2,3] 
+ -d idSaleLines="[1,2,3]"
 ```
 
-## setOccupation
+## blockout
 
 Block slots in the occupation table 
 
-Authentication: public or private depending on the tenant configuration
+Authentication: private
 
 | Argument    | Type     | Required | Description |
 |-------------|----------|----------|-------------|
+| tenant      | string   | yes      | Club name                                                    |
 | idResource  | int      | yes      | The resource id                                              |
 | start       | datetime | yes      | UTC initial date and inital hour for blocking slots          |
 | end         | datetime | yes      | UTC end data and end hour for searching slots availability   |
@@ -273,7 +279,7 @@ Example:
 
 ```bash
 curl https://test.golfmanager.es/gmr/api/setOccupation.api \
- -d idResource=1 \
+ -d idResource="1" \
  -d start="2018-12-14T08:00:00+01:00" \
  -d end="2018-12-14T18:00:00+01:00" \
 ```
