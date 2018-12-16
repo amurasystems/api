@@ -122,7 +122,7 @@ Authentication: private
 Example:
 
 ```bash
-curl https://test.golfmanager.es/gmr/api/getClients.api \
+curl https://all.golfmanager.es/gmr/api/getClients.api \
  -d tenant="test" \
  -d search="a" \
  -d limit="500"
@@ -170,7 +170,8 @@ Authentication: private
 Example:
 
 ```bash
-curl https://test.golfmanager.es/gmr/api/getProducts.api \
+curl https://all.golfmanager.es/gmr/api/getProducts.api \
+ -d tenant="test" \
  -d search="a" \
  -d limit="500"
 ```
@@ -216,7 +217,8 @@ Authentication: private
 Example:
 
 ```bash
-curl https://test.golfmanager.es/gmr/api/newSale.api \
+curl https://all.golfmanager.es/gmr/api/newSale.api \
+ -d tenant="test" \
  -d idProduct="1" \
  -d idClient="1" \
  -d parentName="Test platform" \
@@ -258,7 +260,8 @@ Authentication: private
 Example:
 
 ```bash
-curl https://test.golfmanager.es/gmr/api/cancelSales.api \
+curl https://all.golfmanager.es/gmr/api/cancelSales.api \
+ -d tenant="test" \
  -d idSaleLines="[1,2,3]"
 ```
 
@@ -274,14 +277,21 @@ Authentication: private
 | idResource  | int      | yes      | The resource id                                              |
 | start       | datetime | yes      | UTC initial date and inital hour for blocking slots          |
 | end         | datetime | yes      | UTC end data and end hour for searching slots availability   |
+| name        | string   | no       | Name to label the blocked slots                              |
+| bgColor     | string   | no       | Background color for slots                                   |
+| fgColor     | string   | no       | Foreground color for slots                                   |
 
 Example:
 
 ```bash
-curl https://test.golfmanager.es/gmr/api/setOccupation.api \
+curl https://all.golfmanager.es/gmr/api/setOccupation.api \
+ -d tenant="test" \
  -d idResource="1" \
  -d start="2018-12-14T08:00:00+01:00" \
  -d end="2018-12-14T18:00:00+01:00" \
+ -d name="Test tournament" \
+ -d bgColor="#000000" \
+ -d fgColor="#ffffff" \
 ```
 
 Golfmanager's API Terms of Service
