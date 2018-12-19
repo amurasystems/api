@@ -77,7 +77,7 @@ List available slots.
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/amura/ebookings/searchAvailability \
+curl https://mt.golfmanager.app/amura/ebookings/searchAvailability \
  -d start="2018-10-23T16:20:00.000Z" \
  -d end="2018-10-23T17:20:00.000Z" \
  -d slots=2
@@ -148,7 +148,7 @@ Arguments: an array of reservation objects. Each reservations must specify:
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/amura/ebookings/makeReservation \
+curl https://mt.golfmanager.app/amura/ebookings/makeReservation \
  -d 'reservations=[{"idType":3,"start":"2018-11-09T08:20:00.000Z"}]'
 ```
 
@@ -184,7 +184,7 @@ Authentication: private
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/amura/api/clients \
+curl https://mt.golfmanager.app/amura/api/clients \
  -u 5Jvm8sCtVr:b31aT5bScxk46aT 
  -d tenant=test \
  -d search=a \
@@ -233,7 +233,7 @@ Authentication: private
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/amura/api/products \
+curl https://mt.golfmanager.app/amura/api/products \
  -u 5Jvm8sCtVr:b31aT5bScxk46aT 
  -d tenant=test \
  -d search=a \
@@ -281,7 +281,7 @@ Authentication: private
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/amura/api/newSale \
+curl https://mt.golfmanager.app/amura/api/newSale \
  -u 5Jvm8sCtVr:b31aT5bScxk46aT 
  -d tenant=test \
  -d idProduct=1 \
@@ -325,7 +325,7 @@ Authentication: private
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/amura/api/cancelSales \
+curl https://mt.golfmanager.app/amura/api/cancelSales \
  -u 5Jvm8sCtVr:b31aT5bScxk46aT 
  -d tenant=test \
  -d idLines=[1,2]
@@ -350,7 +350,7 @@ Authentication: private
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/amura/api/blockout \
+curl https://mt.golfmanager.app/amura/api/blockout \
  -u 5Jvm8sCtVr:b31aT5bScxk46aT 
  -d tenant=test \
  -d idResource=1 \
