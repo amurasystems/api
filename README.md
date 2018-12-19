@@ -25,7 +25,7 @@ Dates are passed in UTC as ISO 8601. For example: 2018-10-23T16:20:00.000Z
  - [Ping](#ping)
  <!-- - [Availability](#availability)
  - [Make a pre reservation](#preReservation)
- - [Confirm a reservation](#reservation)
+ - [Confirm a reservation](#confirm)
  - [Cancel a reservation](#cancelReservation) -->
  - [Clients](#clients)
  - [Products](#products)
@@ -46,7 +46,7 @@ Example request
 
 ```
 $ curl -i https://mt.golfmanager.app/amura/api/ping \
-   -u 5Jvm8sCtVr:b31aT5bScxk46aT
+   -u 5Jvm8sCtVr:b31aT5bScxk46aT \
    -d tenant=demo
 ```
 
@@ -185,7 +185,7 @@ Example:
 
 ```bash
 curl https://mt.golfmanager.app/amura/api/clients \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT 
+ -u 5Jvm8sCtVr:b31aT5bScxk46aT \
  -d tenant=test \
  -d search=a \
  -d limit=500
@@ -234,7 +234,7 @@ Example:
 
 ```bash
 curl https://mt.golfmanager.app/amura/api/products \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT 
+ -u 5Jvm8sCtVr:b31aT5bScxk46aT \
  -d tenant=test \
  -d search=a \
  -d limit=500
@@ -282,7 +282,7 @@ Example:
 
 ```bash
 curl https://mt.golfmanager.app/amura/api/newSale \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT 
+ -u 5Jvm8sCtVr:b31aT5bScxk46aT \
  -d tenant=test \
  -d idProduct=1 \
  -d idClient=1 \
@@ -326,7 +326,7 @@ Example:
 
 ```bash
 curl https://mt.golfmanager.app/amura/api/cancelSales \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT 
+ -u 5Jvm8sCtVr:b31aT5bScxk46aT \
  -d tenant=test \
  -d idLines=[1,2]
 ```
@@ -351,7 +351,7 @@ Example:
 
 ```bash
 curl https://mt.golfmanager.app/amura/api/blockout \
- -u 5Jvm8sCtVr:b31aT5bScxk46aT 
+ -u 5Jvm8sCtVr:b31aT5bScxk46aT \
  -d tenant=test \
  -d idResource=1 \
  -d start=2018-12-14T08:00:00+01:00 \
