@@ -1,21 +1,83 @@
-# Golfmanager API
+# API Reference
 
-## searchAvailability
+## Authentication
+
+Authentication is performed via HTTP Basic Auth. 
+
+All API requests must be made over HTTPS. Calls made over plain HTTP will fail. API requests without authentication will also fail.
+
+## Errors
+
+The API uses conventional HTTP response codes to indicate the success or failure of an API request. In general: Codes in the 2xx range indicate success. Codes in the 4xx range indicate an error that failed given the information provided (e.g., a required parameter was omitted, a charge failed, etc.).
+
+## Handling errors
+
+Our API raise exceptions for many reasons, such as a failed charge, invalid parameters, authentication errors, and network unavailability. We recommend writing code that gracefully handles all possible API exceptions.
+
+## Dates
+
+Dates are passed in UTC as ISO 8601. For example: 2018-10-23T16:20:00.000Z
+
+---------------------------
+
+## Api
+
+ - [Ping](#ping)
+ <!-- - [Availability](#availability)
+ - [Make a pre reservation](#preReservation)
+ - [Confirm a reservation](#reservation)
+ - [Cancel a reservation](#cancelReservation) -->
+ - [Clients](#clients)
+ - [Products](#products)
+ - [New sale](#newSale)
+ - [Cancel sales](#cancelSales)
+ - [Blockout](#blockout)
+
+
+
+---------------------------
+
+
+<h2 id="ping">Ping</h2>
+
+Test your credentials.
+
+Example request
+
+```
+$ curl -i https://mt.golfmanager.app/amura/api/ping \
+   -u 5Jvm8sCtVr:b31aT5bScxk46aT
+   -d tenant=demo
+```
+
+Example response
+
+```
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Date: Tue, 18 Dec 2018 17:46:52 GMT
+Content-Length: 5
+
+"OK"
+```
+
+<!-- 
+
+<h2 id="availability">Availability</h2>
 
 List available slots.
 
-Authentication: public or private depending on the tenant configuration
-
-| Argument | Type     | Required | Description |
-|----------|----------|----------|-------------|
-| start    | datetime | yes      | The start of the search period |
-| end      | datetime | yes      | The end of the search period   |
-| slots    | int      | no       | The number of green fees (default is 1)   |
+| Argument | Type     | Required | Description                             |
+|----------|----------|----------|-----------------------------------------|
+| tenant   | string   | yes      | The start of the search period          |
+| start    | datetime | yes      | The start of the search period          |
+| end      | datetime | yes      | The end of the search period            |
+| slots    | int      | no       | The number of green fees (default is 1) |
 
 Example:
 
 ```bash
-curl https://test.golfmanager.es/amura/ebookings/searchAvailability.api \
+curl https://mt.golfmanager.es/amura/ebookings/searchAvailability \
  -d start="2018-10-23T16:20:00.000Z" \
  -d end="2018-10-23T17:20:00.000Z" \
  -d slots=2
@@ -25,14 +87,14 @@ Response:
 
 Return a list of slots:
 
-| Argument | Type     | Required | Description |
-|----------|----------|----------|-------------|
-| id          | int           | yes      | The reservation type id |
-| max         | int           | no       | The maximum number of slots allowed  |
-| min         | int           | no       | The minimum number of slots allowed  |
-| multiple    | int           | no       | In case this type must be reserved in multiples   |
-| price       | float         | yes      | The price per slot including taxes  |
-| start       | datetime      | yes      | The date of this slot  |
+| Argument | Type     | Required | Description                                     |
+|----------|----------|----------|-------------------------------------------------|
+| id       | int      | yes      | The reservation type id                         |
+| max      | int      | no       | The maximum number of slots allowed             |
+| min      | int      | no       | The minimum number of slots allowed             |
+| multiple | int      | no       | In case this type must be reserved in multiples |
+| price    | float    | yes      | The price per slot including taxes              |
+| start    | datetime | yes      | The date of this slot                           |
 
 Example:
 
@@ -70,7 +132,7 @@ Example:
 
 
 
-## makeReservation
+### makeReservation
 
 Make a reservation. The reservation needs to be confirmed before a period of time configured by the tenant. After that it will be automatically released.
 
@@ -78,15 +140,15 @@ Authentication: public or private depending on the tenant configuration
 
 Arguments: an array of reservation objects. Each reservations must specify:
 
-| Argument | Type     | Required | Description |
-|----------|----------|----------|-------------|
-| type       | int         | yes      | The id obtained from searchAvailability  |
-| start       | datetime      | yes      | The date of this slot  |
+| Argument | Type     | Required | Description                             |
+|----------|----------|----------|-----------------------------------------|
+| type     | int      | yes      | The id obtained from searchAvailability |
+| start    | datetime | yes      | The date of this slot                   |
 
 Example:
 
 ```bash
-curl https://test.golfmanager.es/amura/ebookings/makeReservation.api \
+curl https://mt.golfmanager.es/amura/ebookings/makeReservation \
  -d 'reservations=[{"idType":3,"start":"2018-11-09T08:20:00.000Z"}]'
 ```
 
@@ -105,38 +167,39 @@ Example:
       "units":1
    }
 }
-```
+``` -->
 
-## getClients
+### Clients
 
 List clients
 
 Authentication: private
 
-| Argument | Type     | Required | Description |
-|----------|----------|----------|-------------|
-| tenant   | string   | yes      | Club name              |
-| search   | string   | no       | Search clients by text |
-| limit    | int      | no       | Limit the number of clients (default is 100)   |
+| Argument | Type   | Required | Description                                  |
+|----------|--------|----------|----------------------------------------------|
+| tenant   | string | yes      | Club name                                    |
+| search   | string | no       | Search clients by text                       |
+| limit    | int    | no       | Limit the number of clients (default is 100) |
 
 Example:
 
 ```bash
-curl https://all.golfmanager.es/gmr/api/getClients.api \
- -d tenant="test" \
- -d search="a" \
- -d limit="500"
+curl https://mt.golfmanager.es/amura/api/clients \
+ -u 5Jvm8sCtVr:b31aT5bScxk46aT 
+ -d tenant=test \
+ -d search=a \
+ -d limit=500
 ```
 
 Response:
 
 Return a list of clients:
 
-| Argument | Type     | Description |
-|----------|----------|-------------|
-| id          | int          | The client id |
-| name        | string       | The client name  |
-| email       | string       | The client email  |
+| Argument | Type   | Description      |
+|----------|--------|------------------|
+| id       | int    | The client id    |
+| name     | string | The client name  |
+| email    | string | The client email |
 
 Example:
 
@@ -155,35 +218,36 @@ Example:
 ]
 ```
 
-## getProducts
+### Products
 
 List products
 
 Authentication: private
 
-| Argument | Type     | Required | Description |
-|----------|----------|----------|-------------|
-| tenant   | string   | yes      | Club name              |
-| search   | string   | no       | Search products by text |
-| limit    | int      | no       | Limit the number of products (default is 100)   |
+| Argument | Type   | Required | Description                                   |
+|----------|--------|----------|-----------------------------------------------|
+| tenant   | string | yes      | Club name                                     |
+| search   | string | no       | Search products by text                       |
+| limit    | int    | no       | Limit the number of products (default is 100) |
 
 Example:
 
 ```bash
-curl https://all.golfmanager.es/gmr/api/getProducts.api \
- -d tenant="test" \
- -d search="a" \
- -d limit="500"
+curl https://mt.golfmanager.es/amura/api/products \
+ -u 5Jvm8sCtVr:b31aT5bScxk46aT 
+ -d tenant=test \
+ -d search=a \
+ -d limit=500
 ```
 
 Response:
 
 Return a list of products:
 
-| Argument | Type     | Description |
-|----------|----------|-------------|
-| id          | int          | The product id |
-| name        | string       | The product name  |
+| Argument | Type   | Description      |
+|----------|--------|------------------|
+| id       | int    | The product id   |
+| name     | string | The product name |
 
 Example:
 
@@ -200,38 +264,39 @@ Example:
 ]
 ```
 
-## newSale
+### newSale
 
 Creates new sale
 
 Authentication: private
 
-| Argument | Type     | Required | Description |
-|----------|----------|----------|-------------|
-| tenant      | string| yes      | Club name      |
-| idProduct   | int   | yes      | The product id |
-| idClient    | int   | yes      | The client id  |
-| parentName  | int   | yes      | Referer name   |
-| idParent    | int   | yes      | Referer id     |
+| Argument   | Type   | Required | Description    |
+|------------|--------|----------|----------------|
+| tenant     | string | yes      | Club name      |
+| idProduct  | int    | yes      | The product id |
+| idClient   | int    | yes      | The client id  |
+| parentName | int    | yes      | Referer name   |
+| idParent   | int    | yes      | Referer id     |
 
 Example:
 
 ```bash
-curl https://all.golfmanager.es/gmr/api/newSale.api \
- -d tenant="test" \
- -d idProduct="1" \
- -d idClient="1" \
+curl https://mt.golfmanager.es/amura/api/newSale \
+ -u 5Jvm8sCtVr:b31aT5bScxk46aT 
+ -d tenant=test \
+ -d idProduct=1 \
+ -d idClient=1 \
  -d parentName="Test platform" \
- -d idParent="1"
+ -d idParent=1
 ```
 
 Response:
 
 Return SaleLine id:
 
-| Argument    | Type     | Description |
-|-------------|----------|-------------|
-| saleLineId  | int      | The SaleLine id |
+| Argument   | Type | Description     |
+|------------|------|-----------------|
+| saleLineId | int  | The SaleLine id |
 
 Example:
 
@@ -246,56 +311,59 @@ Example:
 ]
 ```
 
-## cancelSales
+### cancelSales
 
 Cancel multiple sales
 
 Authentication: private
 
-| Argument    | Type     | Required | Description |
-|-------------|----------|----------|-------------|
-| tenant      | string   | yes      | Club name                   |
-| idSaleLines | int[]    | yes      | Array with the saleline ids |
+| Argument    | Type   | Required | Description                 |
+|-------------|--------|----------|-----------------------------|
+| tenant      | string | yes      | Club name                   |
+| idSaleLines | int[]  | yes      | Array with the saleline ids |
 
 Example:
 
 ```bash
-curl https://all.golfmanager.es/gmr/api/cancelSales.api \
- -d tenant="test" \
- -d idSaleLines="[1,2,3]"
+curl https://mt.golfmanager.es/amura/api/cancelSales \
+ -u 5Jvm8sCtVr:b31aT5bScxk46aT 
+ -d tenant=test \
+ -d idLines=[1,2]
 ```
 
-## blockout
+### blockout
 
 Block slots in the occupation table 
 
 Authentication: private
 
-| Argument    | Type     | Required | Description |
-|-------------|----------|----------|-------------|
-| tenant      | string   | yes      | Club name                                                    |
-| idResource  | int      | yes      | The resource id                                              |
-| start       | datetime | yes      | UTC initial date and inital hour for blocking slots          |
-| end         | datetime | yes      | UTC end data and end hour for searching slots availability   |
-| name        | string   | no       | Name to label the blocked slots                              |
-| bgColor     | string   | no       | Background color for slots                                   |
-| fgColor     | string   | no       | Foreground color for slots                                   |
+| Argument   | Type     | Required | Description                                                |
+|------------|----------|----------|------------------------------------------------------------|
+| tenant     | string   | yes      | Club name                                                  |
+| idResource | int      | yes      | The resource id                                            |
+| start      | datetime | yes      | UTC initial date and inital hour for blocking slots        |
+| end        | datetime | yes      | UTC end data and end hour for searching slots availability |
+| name       | string   | no       | Name to label the blocked slots                            |
+| bgColor    | string   | no       | Background color for slots                                 |
+| fgColor    | string   | no       | Foreground color for slots                                 |
 
 Example:
 
 ```bash
-curl https://all.golfmanager.es/gmr/api/setOccupation.api \
- -d tenant="test" \
- -d idResource="1" \
- -d start="2018-12-14T08:00:00+01:00" \
- -d end="2018-12-14T18:00:00+01:00" \
- -d name="Test tournament" \
- -d bgColor="#000000" \
- -d fgColor="#ffffff" \
+curl https://mt.golfmanager.es/amura/api/blockout \
+ -u 5Jvm8sCtVr:b31aT5bScxk46aT 
+ -d tenant=test \
+ -d idResource=1 \
+ -d start=2018-12-14T08:00:00+01:00 \
+ -d end=2018-12-14T18:00:00+01:00 \
+ -d name=Test tournament \
+ -d bgColor=#000000 \
+ -d fgColor=#ffffff \
 ```
 
-Golfmanager's API Terms of Service
----
+---------------------------
+
+## Terms of Service
 
 - Thank you for using Golfmanager! When you develop on the Golfmanager Platform,
 you agree to be bound by the following terms, so please read them carefully. 
