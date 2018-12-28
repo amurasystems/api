@@ -47,7 +47,7 @@ Example request
 ```
 $ curl -i https://mt.golfmanager.app/amura/api/ping \
    -u 5Jvm8sCtVr:b31aT5bScxk46aT \
-   -d tenant=demo
+   -d tenant=test
 ```
 
 Example response
@@ -77,8 +77,10 @@ Example:
 
 ```bash
 curl https://mt.golfmanager.app/amura/api/searchAvailability \
- -d start="2018-10-23T16:20:00.000Z" \
- -d end="2018-10-23T17:20:00.000Z" \
+ -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -d tenant=test \
+ -d start="2019-01-23T16:20:00.000Z" \
+ -d end="2019-01-23T17:20:00.000Z" \
  -d slots=2
 ```
 
@@ -147,7 +149,9 @@ Example:
 
 ```bash
 curl https://mt.golfmanager.app/amura/ebookings/makeReservation \
- -d 'reservations=[{"idType":3,"start":"2018-11-09T08:20:00.000Z"}]'
+ -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -d tenant=test \
+ -d 'reservations=[{"idType":3,"start":"2019-01-09T08:20:00.000Z"}]'
 ```
 
 Response:
