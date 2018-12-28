@@ -23,9 +23,9 @@ Dates are passed in UTC as ISO 8601. For example: 2018-10-23T16:20:00.000Z
 ## Api
 
  - [Ping](#ping)
- <!-- - [Availability](#availability)
+-  [Availability](#availability)
  - [Make a pre reservation](#preReservation)
- - [Confirm a reservation](#confirm)
+ <!-- - [Confirm a reservation](#confirm)
  - [Cancel a reservation](#cancelReservation) -->
  - [Clients](#clients)
  - [Products](#products)
@@ -33,7 +33,7 @@ Dates are passed in UTC as ISO 8601. For example: 2018-10-23T16:20:00.000Z
  - [Cancel sales](#cancelSales)
  - [Blockout](#blockout)
 
-
+ 
 
 ---------------------------
 
@@ -61,7 +61,6 @@ Content-Length: 5
 "OK"
 ```
 
-<!-- 
 
 <h2 id="availability">Availability</h2>
 
@@ -77,7 +76,7 @@ List available slots.
 Example:
 
 ```bash
-curl https://mt.golfmanager.app/amura/ebookings/searchAvailability \
+curl https://mt.golfmanager.app/amura/api/searchAvailability \
  -d start="2018-10-23T16:20:00.000Z" \
  -d end="2018-10-23T17:20:00.000Z" \
  -d slots=2
@@ -85,7 +84,7 @@ curl https://mt.golfmanager.app/amura/ebookings/searchAvailability \
 
 Response:
 
-Return a list of slots:
+Returns a list of slots:
 
 | Argument | Type     | Required | Description                                     |
 |----------|----------|----------|-------------------------------------------------|
@@ -131,7 +130,6 @@ Example:
 ```
 
 
-
 ### makeReservation
 
 Make a reservation. The reservation needs to be confirmed before a period of time configured by the tenant. After that it will be automatically released.
@@ -142,7 +140,7 @@ Arguments: an array of reservation objects. Each reservations must specify:
 
 | Argument | Type     | Required | Description                             |
 |----------|----------|----------|-----------------------------------------|
-| type     | int      | yes      | The id obtained from searchAvailability |
+| idType   | int      | yes      | The id obtained from searchAvailability |
 | start    | datetime | yes      | The date of this slot                   |
 
 Example:
@@ -167,7 +165,7 @@ Example:
       "units":1
    }
 }
-``` -->
+``` 
 
 ### Clients
 
