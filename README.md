@@ -23,8 +23,8 @@ Dates are passed in UTC as ISO 8601. For example: 2018-10-23T16:20:00.000Z
 ## Api
 
  - [Ping](#ping)
--  [Availability](#availability)
- - [Make a pre reservation](#preReservation)
+-  [Search availability](#availability)
+ - [Make a reservation](#preReservation)
  <!-- - [Confirm a reservation](#confirm)
  - [Cancel a reservation](#cancelReservation) -->
  - [Clients](#clients)
@@ -62,7 +62,7 @@ Content-Length: 5
 ```
 
 
-<h2 id="availability">Availability</h2>
+<h2 id="availability">Search availability</h2>
 
 List available slots.
 
