@@ -24,9 +24,8 @@ Dates are passed in UTC as ISO 8601. For example: 2018-10-23T16:20:00.000Z
 
  - [Ping](#ping)
 -  [Search availability](#availability)
- - [Make a reservation](#preReservation)
- <!-- - [Confirm a reservation](#confirm)
- - [Cancel a reservation](#cancelReservation) -->
+ - [Make reservations](#makereservations)
+ - [Cancel reservations](#cancelreservations)
  - [Clients](#clients)
  - [Products](#products)
  - [New sale](#newSale)
@@ -132,11 +131,9 @@ Example:
 ```
 
 
-### makeReservation
+<h2 id="makereservations">Make reservations</h2>
 
-Make a reservation. The reservation needs to be confirmed before a period of time configured by the tenant. After that it will be automatically released.
-
-Authentication: public or private depending on the tenant configuration
+The reservation needs to be confirmed before a period of time configured by the tenant. After that it will be automatically released.
 
 Arguments: an array of reservation objects. Each reservations must specify:
 
@@ -162,6 +159,9 @@ Example:
 
 ```json
 {  
+   "reservations": [
+     { "id":"RCA6", "idType":1, "start":"2019-01-09T08:20:00.000Z" }
+   ],
    "cart":{  
       "idSale":5448,
       "quantity":1,
@@ -171,11 +171,32 @@ Example:
 }
 ``` 
 
+<h2 id="cancelreservations">Cancel reservations</h2>
+
+Cancel reservations by id.
+
+Example:
+
+```bash
+curl https://mt.golfmanager.app/amura/ebookings/cancelReservation \
+ -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -d tenant=test \
+ -d 'ids=["RCA6"]'
+```
+
+Response:
+
+If it succeeded or the error.
+
+Example:
+
+```json
+{ "success": true }
+``` 
+
 ### Clients
 
 List clients
-
-Authentication: private
 
 | Argument | Type   | Required | Description                                  |
 |----------|--------|----------|----------------------------------------------|
@@ -224,8 +245,6 @@ Example:
 
 List products
 
-Authentication: private
-
 | Argument | Type   | Required | Description                                   |
 |----------|--------|----------|-----------------------------------------------|
 | tenant   | string | yes      | Club name                                     |
@@ -269,8 +288,6 @@ Example:
 ### newSale
 
 Creates new sale
-
-Authentication: private
 
 | Argument   | Type   | Required | Description    |
 |------------|--------|----------|----------------|
@@ -317,8 +334,6 @@ Example:
 
 Cancel multiple sales
 
-Authentication: private
-
 | Argument    | Type   | Required | Description                 |
 |-------------|--------|----------|-----------------------------|
 | tenant      | string | yes      | Club name                   |
@@ -336,8 +351,6 @@ curl https://mt.golfmanager.app/amura/api/cancelSales \
 ### blockout
 
 Block slots in the occupation table 
-
-Authentication: private
 
 | Argument   | Type     | Required | Description                                                |
 |------------|----------|----------|------------------------------------------------------------|
