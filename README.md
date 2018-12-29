@@ -8,7 +8,7 @@ All API requests must be made over HTTPS. Calls made over plain HTTP will fail. 
 
 ## Errors
 
-The API uses conventional HTTP response codes to indicate the success or failure of an API request. In general: Codes in the 2xx range indicate success. Codes in the 4xx range indicate an error that failed given the information provided (e.g., a required parameter was omitted, a charge failed, etc.).
+The API uses conventional HTTP response codes to indicate the success or failure of an API request. In general: Codes in the 2xx range indicate success. Codes in the 4xx range indicate an error that failed given the information provided (e.g., a required parameter was omitted, a reservation failed, etc.).
 
 ## Handling errors
 
@@ -20,12 +20,15 @@ Dates are passed in UTC as ISO 8601. For example: 2018-10-23T16:20:00.000Z
 
 ---------------------------
 
-## Api
+## Consumer API
 
  - [Ping](#ping)
 -  [Search availability](#availability)
  - [Make reservations](#makereservations)
  - [Cancel reservations](#cancelreservations)
+
+ ## Admin API
+ - [Ping](#ping)
  - [Clients](#clients)
  - [Products](#products)
  - [New sale](#newSale)
@@ -40,6 +43,8 @@ Dates are passed in UTC as ISO 8601. For example: 2018-10-23T16:20:00.000Z
 <h2 id="ping">Ping</h2>
 
 Test your credentials.
+
+Method: GET
 
 Example request
 
@@ -64,6 +69,8 @@ Content-Length: 5
 <h2 id="availability">Search availability</h2>
 
 List available slots.
+
+Method: GET
 
 | Argument | Type     | Required | Description                             |
 |----------|----------|----------|-----------------------------------------|
@@ -135,12 +142,16 @@ Example:
 
 The reservation needs to be confirmed before a period of time configured by the tenant. After that it will be automatically released.
 
+Methbod: POST
+
 Arguments: an array of reservation objects. Each reservations must specify:
 
 | Argument | Type     | Required | Description                             |
 |----------|----------|----------|-----------------------------------------|
 | idType   | int      | yes      | The id obtained from searchAvailability |
 | start    | datetime | yes      | The date of this slot                   |
+| name     | string   | no       | The client's name                       |
+| email    | string   | no       | The client's email                      |
 
 Example:
 
@@ -153,14 +164,14 @@ curl https://mt.golfmanager.app/amura/ebookings/makeReservation \
 
 Response:
 
-Return the sale information to complete the payment if it needs to be prepaid 
+Return reservations with their ID in case they need to be canceled. It also returns the sale information.
 
 Example:
 
 ```json
 {  
    "reservations": [
-     { "id":"RCA6", "idType":1, "start":"2019-01-09T08:20:00.000Z" }
+     { "id":234, "idType":3, "start":"2019-01-09T08:20:00.000Z" }
    ],
    "cart":{  
       "idSale":5448,
@@ -175,13 +186,15 @@ Example:
 
 Cancel reservations by id.
 
+Methbod: POST
+
 Example:
 
 ```bash
 curl https://mt.golfmanager.app/amura/ebookings/cancelReservation \
  -u 5Jvm8sCtVr:b31aT5bScxk46aT \
  -d tenant=test \
- -d 'ids=["RCA6"]'
+ -d 'ids=[234]'
 ```
 
 Response:
@@ -197,6 +210,8 @@ Example:
 ### Clients
 
 List clients
+
+Method: GET
 
 | Argument | Type   | Required | Description                                  |
 |----------|--------|----------|----------------------------------------------|
@@ -245,6 +260,8 @@ Example:
 
 List products
 
+Method: GET
+
 | Argument | Type   | Required | Description                                   |
 |----------|--------|----------|-----------------------------------------------|
 | tenant   | string | yes      | Club name                                     |
@@ -288,6 +305,8 @@ Example:
 ### newSale
 
 Creates new sale
+
+Method: GET
 
 | Argument   | Type   | Required | Description    |
 |------------|--------|----------|----------------|
@@ -334,6 +353,8 @@ Example:
 
 Cancel multiple sales
 
+Method: POST
+
 | Argument    | Type   | Required | Description                 |
 |-------------|--------|----------|-----------------------------|
 | tenant      | string | yes      | Club name                   |
@@ -351,6 +372,8 @@ curl https://mt.golfmanager.app/amura/api/cancelSales \
 ### blockout
 
 Block slots in the occupation table 
+
+Method: POST
 
 | Argument   | Type     | Required | Description                                                |
 |------------|----------|----------|------------------------------------------------------------|
