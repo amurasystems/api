@@ -156,7 +156,7 @@ Arguments: an array of reservation objects. Each reservations must specify:
 Example:
 
 ```bash
-curl https://mt.golfmanager.app/amura/ebookings/makeReservation \
+curl https://mt.golfmanager.app/amura/api/makeReservation \
  -u 5Jvm8sCtVr:b31aT5bScxk46aT \
  -d tenant=test \
  -d 'reservations=[{"idType":3,"start":"2019-01-09T08:20:00.000Z"}]'
@@ -191,7 +191,7 @@ Methbod: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.app/amura/ebookings/cancelReservation \
+curl https://mt.golfmanager.app/amura/api/cancelReservation \
  -u 5Jvm8sCtVr:b31aT5bScxk46aT \
  -d tenant=test \
  -d 'ids=[234]'
