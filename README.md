@@ -72,12 +72,13 @@ List available slots.
 
 Method: GET
 
-| Argument | Type     | Required | Description                             |
-|----------|----------|----------|-----------------------------------------|
-| tenant   | string   | yes      | The start of the search period          |
-| start    | datetime | yes      | The start of the search period          |
-| end      | datetime | yes      | The end of the search period            |
-| slots    | int      | no       | The number of green fees (default is 1) |
+| Argument   | Type     | Required | Description                             |
+|------------|----------|----------|-----------------------------------------|
+| tenant     | string   | yes      | The start of the search period          |
+| start      | datetime | yes      | The start of the search period          |
+| end        | datetime | yes      | The end of the search period            |
+| slots      | int      | no       | The number of green fees (default is 1) |
+| idResource | int      | no       | To filter slots by a resource           |
 
 Example:
 
@@ -94,14 +95,15 @@ Response:
 
 Returns a list of slots:
 
-| Argument | Type     | Required | Description                                     |
-|----------|----------|----------|-------------------------------------------------|
-| id       | int      | yes      | The reservation type id                         |
-| max      | int      | no       | The maximum number of slots allowed             |
-| min      | int      | no       | The minimum number of slots allowed             |
-| multiple | int      | no       | In case this type must be reserved in multiples |
-| price    | float    | yes      | The price per slot including taxes              |
-| start    | datetime | yes      | The date of this slot                           |
+| Argument   | Type     | Description                                     |
+|------------|----------|-------------------------------------------------|
+| id         | int      | The reservation type id                         |
+| max        | int      | The maximum number of slots allowed             |
+| min        | int      | The minimum number of slots allowed             |
+| multiple   | int      | In case this type must be reserved in multiples |
+| price      | float    | The price per slot including taxes              |
+| start      | datetime | The date of this slot                           |
+| idResource | int      | The resource of this slot                       |
 
 Example:
 
@@ -114,7 +116,8 @@ Example:
     "multiple": null,
     "name": "Green Fee 18 hoyos",
     "price": 50,
-    "start": "2018-11-09T10:00:00+02:00"
+    "start": "2018-11-09T10:00:00+02:00",
+    "idResource": 1
   },
   {
     "id": 3,
@@ -123,7 +126,8 @@ Example:
     "multiple": null,
     "name": "Green Fee 9 hoyos",
     "price": 35,
-    "start": "2018-11-09T10:00:00+02:00"
+    "start": "2018-11-09T10:00:00+02:00",
+    "idResource": null
   },
   {
     "id": 33,
@@ -132,7 +136,8 @@ Example:
     "multiple": 2,
     "name": "Pack 2 GF+ Buggy",
     "price": 59,
-    "start": "2018-11-09T10:00:00+02:00"
+    "start": "2018-11-09T10:00:00+02:00",
+    "idResource": null
   }
 ]
 ```
@@ -156,7 +161,7 @@ Arguments: an array of reservation objects. Each reservations must specify:
 Example:
 
 ```bash
-curl https://mt.golfmanager.app/amura/api/makeReservation \
+curl https://mt.golfmanager.app/amura/ebookings/makeReservation \
  -u 5Jvm8sCtVr:b31aT5bScxk46aT \
  -d tenant=test \
  -d 'reservations=[{"idType":3,"start":"2019-01-09T08:20:00.000Z"}]'
@@ -191,7 +196,7 @@ Methbod: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.app/amura/api/cancelReservation \
+curl https://mt.golfmanager.app/amura/ebookings/cancelReservation \
  -u 5Jvm8sCtVr:b31aT5bScxk46aT \
  -d tenant=test \
  -d 'ids=[234]'
