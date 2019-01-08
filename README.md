@@ -20,15 +20,16 @@ Dates are passed in UTC as ISO 8601. For example: 2018-10-23T16:20:00.000Z
 
 ---------------------------
 
+ - [Ping](#ping)
+ - [Tenants](#tenants)
+
 ## Consumer API
 
- - [Ping](#ping)
--  [Search availability](#availability)
+ - [Search availability](#availability)
  - [Make reservations](#makereservations)
  - [Cancel reservations](#cancelreservations)
 
  ## Admin API
- - [Ping](#ping)
  - [Clients](#clients)
  - [Products](#products)
  - [New sale](#newSale)
@@ -63,6 +64,28 @@ Date: Tue, 18 Dec 2018 17:46:52 GMT
 Content-Length: 5
 
 "OK"
+```
+
+
+
+
+<h2 id="tenants">Tenants</h2>
+
+Returns the tenants this key has access to.
+
+Method: GET
+
+Example request
+
+```
+$ curl -i https://mt.golfmanager.app/amura/api/tenants \
+   -u 5Jvm8sCtVr:b31aT5bScxk46aT
+```
+
+Example response
+
+```json
+["demo1","demo2","demo3"]
 ```
 
 
