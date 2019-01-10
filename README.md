@@ -168,8 +168,6 @@ Example:
 
 <h2 id="makereservations">Make reservations</h2>
 
-The reservation needs to be confirmed before a period of time configured by the tenant. After that it will be automatically released.
-
 Methbod: POST
 
 Arguments: an array of reservation objects. Each reservations must specify:
