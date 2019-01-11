@@ -185,7 +185,7 @@ Example:
 curl https://mt.golfmanager.app/amura/ebookings/makeReservation \
  -u 5Jvm8sCtVr:b31aT5bScxk46aT \
  -d tenant=test \
- -d 'reservations=[{"idType":3,"start":"2019-01-09T08:20:00.000Z"}]'
+ -d 'reservations=[{"idType":3,"start":"2018-11-09T10:00:00+02:00"}]'
 ```
 
 Response:
@@ -197,7 +197,7 @@ Example:
 ```json
 {  
    "reservations": [
-     { "id":234, "idType":3, "start":"2019-01-09T08:20:00.000Z" }
+     { "id":234, "idType":3, "start":"2018-11-09T10:00:00+02:00" }
    ],
    "cart":{  
       "idSale":5448,
