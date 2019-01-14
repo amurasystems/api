@@ -16,7 +16,15 @@ Our API raise exceptions for many reasons, such as a failed charge, invalid para
 
 ## Dates
 
-Dates are passed in UTC as ISO 8601. For example: 2018-10-23T16:20:00.000Z
+The date format is ISO 8601 and can be passed in UTC or in the local time of the tenant. 
+
+For example:
+
+2018-10-09T09:00:00.000Z
+
+This is equivalent for a tenant timezone "Europe/Madrid": 
+
+2018-11-09T10:00:00+01:00 
 
 ---------------------------
 
