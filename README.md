@@ -20,7 +20,6 @@ Dates are passed in UTC as ISO 8601. For example: 2018-10-23T16:20:00.000Z
 
 ---------------------------
 
- - [Ping](#ping)
  - [Tenants](#tenants)
 
 ## Consumer API
@@ -35,38 +34,10 @@ Dates are passed in UTC as ISO 8601. For example: 2018-10-23T16:20:00.000Z
  - [New sale](#newSale)
  - [Cancel sales](#cancelSales)
  - [Blockout](#blockout)
+ - [Cancel blockout](#cancelblockout)
 
  
-
 ---------------------------
-
-
-<h2 id="ping">Ping</h2>
-
-Test your credentials.
-
-Method: GET
-
-Example request
-
-```
-$ curl -i https://mt.golfmanager.app/amura/api/ping \
-   -u 5Jvm8sCtVr:b31aT5bScxk46aT \
-   -d tenant=test
-```
-
-Example response
-
-```
-HTTP/1.1 200 OK
-Content-Type: application/json; charset=utf-8
-Date: Tue, 18 Dec 2018 17:46:52 GMT
-Content-Length: 5
-
-"OK"
-```
-
-
 
 
 <h2 id="tenants">Tenants</h2>
@@ -239,11 +210,12 @@ List clients
 
 Method: GET
 
-| Argument | Type   | Required | Description                                  |
-|----------|--------|----------|----------------------------------------------|
-| tenant   | string | yes      | Club name                                    |
-| search   | string | no       | Search clients by text                       |
-| limit    | int    | no       | Limit the number of clients (default is 100) |
+| Argument | Type   | Required | Description                                                 |
+|----------|--------|----------|-------------------------------------------------------------|
+| tenant   | string | yes      | Club name                                                   |
+| search   | string | no       | Search clients by text                                      |
+| offset   | int    | no       | The offset of the first row to be returned                  |
+| count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
 
 Example:
 
@@ -288,11 +260,12 @@ List products
 
 Method: GET
 
-| Argument | Type   | Required | Description                                   |
-|----------|--------|----------|-----------------------------------------------|
-| tenant   | string | yes      | Club name                                     |
-| search   | string | no       | Search products by text                       |
-| limit    | int    | no       | Limit the number of products (default is 100) |
+| Argument | Type   | Required | Description                                                 |
+|----------|--------|----------|-------------------------------------------------------------|
+| tenant   | string | yes      | Club name                                                   |
+| search   | string | no       | Search products by text                                     |
+| offset   | int    | no       | The offset of the first row to be returned                  |
+| count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
 
 Example:
 
@@ -424,6 +397,47 @@ curl https://mt.golfmanager.app/amura/api/blockout \
  -d bgColor=#000000 \
  -d fgColor=#ffffff \
 ```
+
+
+Response:
+
+The object created with its id
+
+Example:
+
+```json
+{
+    "id": 26,
+    "idResource": 1,
+    "start": "2018-12-14T08:00:00+01:00"
+    "end": "2018-12-14T18:00:00+01:00",
+    "name": null,
+    "bgColor": null,
+    "fgColor": null,
+}
+```
+
+<h2 id="cancelblockout">Cancel blockout</h2>
+
+Cancel a blockout by ID 
+
+Method: POST
+
+| Argument | Type   | Required | Description            |
+|----------|--------|----------|------------------------|
+| tenant   | string | yes      | Club name              |
+| id       | int    | yes      | The blockout object id |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.app/amura/api/blockout \
+ -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -d tenant=test \
+ -d id=1
+```
+
+
 
 ---------------------------
 
