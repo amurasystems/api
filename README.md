@@ -164,7 +164,7 @@ Example:
 curl https://mt.golfmanager.app/amura/ebookings/makeReservation \
  -u 5Jvm8sCtVr:b31aT5bScxk46aT \
  -d tenant=test \
- -d 'reservations=[{"idType":3,"start":"2018-11-09T10:00:00+02:00"}]'
+ -d 'reservations=[{"idType":3,"start":"2018-11-09T10:00:00%2B02:00"}]'
 ```
 
 Response:
