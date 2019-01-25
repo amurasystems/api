@@ -247,7 +247,8 @@ Example:
     "street": "Orense 64",
     "town": "Madrid",
     "web": "https://golfmanager.com",
-    "zipCode": "28020"
+    "zipCode": "28020",
+    "timezoneName": "Atlantic/Canary",
 }
 ```
 
