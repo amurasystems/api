@@ -32,6 +32,7 @@ This is equivalent for a tenant timezone "Europe/Madrid":
 
 ## Consumer API
 
+ - [Tenant](#tenant)
  - [Search availability](#availability)
  - [Make reservations](#makereservations)
  - [Cancel reservations](#cancelreservations)
