@@ -283,7 +283,7 @@ Example:
 ```json
 [
     {
-        "checkin": false,
+        "checkin": 0,
         "confirmDate": null,
         "createDate": "2019-01-25T15:54:49.25924646Z",
         "end": "2019-01-25T17:04:49.25905354Z",
@@ -291,9 +291,9 @@ Example:
         "idClientGroup": 1,
         "idResource": 3,
         "idType": 1,
-        "noShow": false,
-        "online": false,
-        "paid": false,
+        "noShow": 0,
+        "online": 0,
+        "paid": 0,
         "start": "2019-01-25T16:54:49.25905354Z"
     },
     ...
