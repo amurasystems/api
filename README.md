@@ -37,7 +37,7 @@ This is equivalent for a tenant timezone "Europe/Madrid":
  - [Cancel reservations](#cancelreservations)
 
  ## Admin API
- - [TenantInfo](#tenantinfo)
+ - [Tenant](#tenant)
  - [Reservations](#reservations)
  - [Clients](#clients)
  - [Products](#products)
@@ -216,7 +216,7 @@ Example:
 
 
 
-<h2 id="tenantinfo">Tenant Info</h2>
+<h2 id="tenant">Tenant</h2>
 
 Returns general information about the tenant like phone, address, etc...
 
@@ -270,8 +270,8 @@ Example:
 curl https://mt.golfmanager.app/amura/api/reservations \
  -u 5Jvm8sCtVr:b31aT5bScxk46aT \
  -d tenant=test \
- -d start=2018-12-14T08:00:00+01:00 \
- -d end=2018-12-14T18:00:00+01:00
+ -d start=2018-12-14T08:00:00%2B01:00 \
+ -d end=2018-12-14T18:00:00%2B01:00
 ```
 
 Response:
@@ -492,8 +492,8 @@ curl https://mt.golfmanager.app/amura/api/blockout \
  -u 5Jvm8sCtVr:b31aT5bScxk46aT \
  -d tenant=test \
  -d idResource=1 \
- -d start=2018-12-14T08:00:00+01:00 \
- -d end=2018-12-14T18:00:00+01:00 \
+ -d start=2018-12-14T08:00:00%2B01:00 \
+ -d end=2018-12-14T18:00:00%2B01:00 \
  -d name=Test tournament \
  -d bgColor=#000000 \
  -d fgColor=#ffffff \
@@ -510,8 +510,8 @@ Example:
 {
     "id": 26,
     "idResource": 1,
-    "start": "2018-12-14T08:00:00+01:00"
-    "end": "2018-12-14T18:00:00+01:00",
+    "start": "2018-12-14T08:00:00%2B01:00"
+    "end": "2018-12-14T18:00:00%2B01:00",
     "name": null,
     "bgColor": null,
     "fgColor": null,
