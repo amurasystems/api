@@ -37,6 +37,8 @@ This is equivalent for a tenant timezone "Europe/Madrid":
  - [Cancel reservations](#cancelreservations)
 
  ## Admin API
+ - [TenantInfo](#tenantinfo)
+ - [Reservations](#reservations)
  - [Clients](#clients)
  - [Products](#products)
  - [New sale](#newSale)
@@ -212,6 +214,97 @@ Example:
 { "success": true }
 ``` 
 
+
+
+<h2 id="tenantinfo">Tenant Info</h2>
+
+Returns general information about the tenant like phone, address, etc...
+
+Methbod: GET
+
+Example:
+
+```bash
+curl https://mt.golfmanager.app/amura/api/tenant \
+ -u 5Jvm8sCtVr:b31aT5bScxk46aT
+```
+
+Response:
+
+Example:
+
+```json
+{
+    "country": "Spain",
+    "email": "info@golfmanager.com",
+    "image": "392416535538319349sA1PFATw5.png",
+    "latitude": "40.2269911",
+    "logo": "3899613330138759642L7prno4J.png",
+    "longitude": "-3.2406688",
+    "name": "Demo Golf Club",
+    "phone": "636236052",
+    "province": "Madrid",
+    "street": "Orense 64",
+    "town": "Madrid",
+    "web": "https://golfmanager.com",
+    "zipCode": "28020"
+}
+```
+
+
+### Reservations
+
+List clients
+
+Method: GET
+
+| Argument | Type     | Required | Description                |
+|----------|----------|----------|----------------------------|
+| tenant   | string   | yes      | Tenant name                |
+| start    | datetime | yes      | Start date and time filter |
+| end      | datetime | yes      | End date and time filter   |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.app/amura/api/reservations \
+ -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -d tenant=test \
+ -d start=2018-12-14T08:00:00+01:00 \
+ -d end=2018-12-14T18:00:00+01:00
+```
+
+Response:
+
+Return a list of reservations
+
+Example:
+
+```json
+[
+    {
+        "checkin": false,
+        "confirmDate": null,
+        "createDate": "2019-01-25T15:54:49.25924646Z",
+        "end": "2019-01-25T17:04:49.25905354Z",
+        "id": 1,
+        "idClientGroup": 1,
+        "idResource": 3,
+        "idType": 1,
+        "noShow": false,
+        "online": false,
+        "paid": false,
+        "start": "2019-01-25T16:54:49.25905354Z"
+    },
+    ...
+]
+```
+
+
+
+
+
+
 ### Clients
 
 List clients
@@ -220,7 +313,7 @@ Method: GET
 
 | Argument | Type   | Required | Description                                                 |
 |----------|--------|----------|-------------------------------------------------------------|
-| tenant   | string | yes      | Club name                                                   |
+| tenant   | string | yes      | Tenant name                                                 |
 | search   | string | no       | Search clients by text                                      |
 | offset   | int    | no       | The offset of the first row to be returned                  |
 | count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
@@ -270,7 +363,7 @@ Method: GET
 
 | Argument | Type   | Required | Description                                                 |
 |----------|--------|----------|-------------------------------------------------------------|
-| tenant   | string | yes      | Club name                                                   |
+| tenant   | string | yes      | Tenant name                                                 |
 | search   | string | no       | Search products by text                                     |
 | offset   | int    | no       | The offset of the first row to be returned                  |
 | count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
@@ -317,7 +410,7 @@ Method: GET
 
 | Argument   | Type   | Required | Description    |
 |------------|--------|----------|----------------|
-| tenant     | string | yes      | Club name      |
+| tenant     | string | yes      | Tenant name    |
 | idProduct  | int    | yes      | The product id |
 | idClient   | int    | yes      | The client id  |
 | parentName | int    | yes      | Referer name   |
@@ -364,7 +457,7 @@ Method: POST
 
 | Argument    | Type   | Required | Description                 |
 |-------------|--------|----------|-----------------------------|
-| tenant      | string | yes      | Club name                   |
+| tenant      | string | yes      | Tenant name                 |
 | idSaleLines | int[]  | yes      | Array with the saleline ids |
 
 Example:
@@ -382,15 +475,15 @@ Block slots in the occupation table
 
 Method: POST
 
-| Argument   | Type     | Required | Description                                                |
-|------------|----------|----------|------------------------------------------------------------|
-| tenant     | string   | yes      | Club name                                                  |
-| idResource | int      | yes      | The resource id                                            |
-| start      | datetime | yes      | UTC initial date and inital hour for blocking slots        |
-| end        | datetime | yes      | UTC end data and end hour for searching slots availability |
-| name       | string   | no       | Name to label the blocked slots                            |
-| bgColor    | string   | no       | Background color for slots                                 |
-| fgColor    | string   | no       | Foreground color for slots                                 |
+| Argument   | Type     | Required | Description                            |
+|------------|----------|----------|----------------------------------------|
+| tenant     | string   | yes      | Tenant name                            |
+| idResource | int      | yes      | The resource id                        |
+| start      | datetime | yes      | Start date and time for blocking slots |
+| end        | datetime | yes      | End date and time for blocking slots   |
+| name       | string   | no       | Name to label the blocked slots        |
+| bgColor    | string   | no       | Background color for slots             |
+| fgColor    | string   | no       | Foreground color for slots             |
 
 Example:
 
@@ -433,7 +526,7 @@ Method: POST
 
 | Argument | Type   | Required | Description            |
 |----------|--------|----------|------------------------|
-| tenant   | string | yes      | Club name              |
+| tenant   | string | yes      | Tenant name            |
 | id       | int    | yes      | The blockout object id |
 
 Example:
