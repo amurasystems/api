@@ -37,6 +37,7 @@ This is equivalent for a tenant timezone "Europe/Madrid":
  - [Make reservations](#makereservations)
  - [Confirm reservations](#confirmreservations)
  - [Cancel reservations](#cancelreservations)
+ - [Sale information](#saleinfo)
 
  ## Admin API
  - [Tenant](#tenant)
@@ -243,6 +244,43 @@ Example:
 ```json
 { "success": true }
 ``` 
+
+
+
+<h2 id="saleinfo">Sale information</h2>
+
+Show information about a sale by id.
+
+Methbod: GET
+
+Example:
+
+```bash
+curl https://mt.golfmanager.app/amura/api/sale \
+ -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -d tenant=test \
+ -d 'id=34'
+```
+
+Response:
+
+```json
+{
+    "lines": [
+        {
+            "canceled": false,
+            "createDate": "2019-01-29T19:04:46.618880302Z",
+            "description": "GF18, Tee 1, 31-01-2019 10:00, 3LG1B, John Smith",
+            "onCredit": false,
+            "paid": false,
+            "prepayPercent": 0,
+            "temp": true,
+            "total": 0
+        }
+    ]
+}
+``` 
+
 
 
 
