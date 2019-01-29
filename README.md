@@ -35,6 +35,7 @@ This is equivalent for a tenant timezone "Europe/Madrid":
  - [Tenant](#tenant)
  - [Search availability](#availability)
  - [Make reservations](#makereservations)
+ - [Confirm reservations](#confirmreservations)
  - [Cancel reservations](#cancelreservations)
 
  ## Admin API
@@ -158,6 +159,7 @@ Arguments: an array of reservation objects. Each reservations must specify:
 |----------|----------|----------|-------------------------------------------------------------------------------|
 | idType   | int      | yes      | The "id" field obtained from searchAvailability. This is the reservation type |
 | start    | datetime | yes      | The date of this slot                                                         |
+| timeout  | datetime | no       | The date when it will be released if it is not confirmed                      |
 | name     | string   | no       | The client's name                                                             |
 | email    | string   | no       | The client's email                                                            |
 
@@ -189,6 +191,33 @@ Example:
    }
 }
 ``` 
+
+
+<h2 id="confirmreservations">Confirm reservations</h2>
+
+Confirm reservations that where created with a timeout.
+
+Methbod: POST
+
+Example:
+
+```bash
+curl https://mt.golfmanager.app/amura/api/confirmReservation \
+ -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -d tenant=test \
+ -d 'ids=[234]'
+```
+
+Response:
+
+If it succeeded or the error.
+
+Example:
+
+```json
+{ "success": true }
+``` 
+
 
 <h2 id="cancelreservations">Cancel reservations</h2>
 
