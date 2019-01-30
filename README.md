@@ -109,7 +109,7 @@ curl https://mt.golfmanager.es/amura/api/searchAvailability \
  -d slots=2
 ```
 
-Example searching only for reservation types that contains 9 or 18 holes:
+Example searching only for reservations that contain 9 or 18 holes:
 
 ```bash
 curl https://mt.golfmanager.es/amura/api/searchAvailability \
@@ -133,7 +133,7 @@ Returns a list of slots:
 | multiple | int      | In case this type must be reserved in multiples |
 | price    | float    | The price per slot including taxes              |
 | start    | datetime | The date of this slot                           |
-| tags     | string[] | Array of tags that for this reservation type    |
+| tags     | string[] | Array of tags to filter types                   |
 
 See above the list of valid tags.
 
