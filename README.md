@@ -125,15 +125,22 @@ Response:
 
 Returns a list of slots:
 
-| Argument | Type     | Description                                     |
-|----------|----------|-------------------------------------------------|
-| id       | int      | The reservation type id                         |
-| max      | int      | The maximum number of slots allowed             |
-| min      | int      | The minimum number of slots allowed             |
-| multiple | int      | In case this type must be reserved in multiples |
-| price    | float    | The price per slot including taxes              |
-| start    | datetime | The date of this slot                           |
-| tags     | string[] | Array of tags to filter types                   |
+| Argument               | Type          | Optional | Description                                                          |
+|------------------------|---------------|----------|----------------------------------------------------------------------|
+| id                     | int           | no       | The reservation type id.                                             |
+| max                    | int           | no       | The maximum number of slots allowed.                                 |
+| min                    | int           | no       | The minimum number of slots allowed.                                 |
+| multiple               | int           | no       | In case this type must be reserved in multiples.                     |
+| price                  | float         | no       | The price per slot including taxes.                                  |
+| start                  | datetime      | no       | The date of this slot.                                               |
+| tags                   | string[]      | no       | Array of tags to filter types.                                       |
+| minCancelAdvance       | datetime      | yes      | Limit date to cancel the reservation.                                |
+| maxReservationsPerSale | int           | yes      | The maximum number of reservations in a sale.                        |
+| maxReservationsPerDay  | int           | yes      | The maximum number of reservations that can be made in the same day. |
+| maxActiveReservations  | int           | yes      | the maximum number of reservations that can be made in advance.      |
+| onCredit               | bool          | yes      | If it is a sale  on credit.                                          |
+| dueDate                | dueDate       | yes      | The sale due date if it is on credit.                                |
+| prepayPercent          | prepayPercent | yes      | The % to pay when making the reservation.                            |
 
 See above the list of valid tags.
 
