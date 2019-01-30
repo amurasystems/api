@@ -34,6 +34,7 @@ This is equivalent for a tenant timezone "Europe/Madrid":
 
  - [Tenant](#tenant)
  - [Search availability](#availability)
+ - [Availability types](#availabilitytypes)
  - [Make reservations](#makereservations)
  - [Confirm reservations](#confirmreservations)
  - [Cancel reservations](#cancelreservations)
@@ -156,7 +157,10 @@ Example:
     "name": "Green Fee 18 holes",
     "price": 50,
     "start": "2018-11-09T10:00:00+02:00",
-    "tags": ["18holes", "tee1"]
+    "tags": [
+      "18holes", 
+      "tee1"
+    ]
   },
   {
     "id": 3,
@@ -166,7 +170,9 @@ Example:
     "name": "Green Fee 9 holes",
     "price": 35,
     "start": "2018-11-09T10:00:00+02:00",
-    "tags": ["9holes"]
+    "tags": [
+      "9holes"
+    ]
   },
   {
     "id": 33,
@@ -176,10 +182,78 @@ Example:
     "name": "Pack 2 GF+ Buggy",
     "price": 59,
     "start": "2018-11-09T10:00:00+02:00",
-    "tags": ["18holes", "buggy]
+    "tags": [
+      "18holes", 
+      "buggy"
+    ]
   }
 ]
 ```
+
+
+
+ - [Availability types](#availabilitytypes)
+<h2 id="availabilitytypes">List reservation types</h2>
+
+Methbod: GET
+
+Arguments: optionally an array of tags to return only results containing those tags.
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/amura/api/availabilityTypes \
+ -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -d tenant=demo 
+```
+
+Or filtering by tag:
+
+```bash
+curl https://mt.golfmanager.es/amura/api/availabilityTypes \
+ -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -d tenant=demo \
+ -d tags=["18holes", "9holes"]
+```
+
+Response:
+
+```json
+[
+    {
+        "description": "Precio por persona",
+        "id": 1,
+        "max": null,
+        "min": null,
+        "multiple": null,
+        "name": "GF18",
+        "tags": [
+            "18holes"
+        ]
+    },
+    {
+        "description": "Oferta sólo Online!",
+        "id": 2,
+        "max": null,
+        "min": null,
+        "multiple": null,
+        "name": "GF9",
+        "tags": [
+            "9holes"
+        ]
+    }
+]
+``` 
+
+
+
+
+
+
+
+
+
+
 
 
 <h2 id="makereservations">Make reservations</h2>
