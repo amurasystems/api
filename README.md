@@ -62,7 +62,7 @@ Method: GET
 Example request
 
 ```
-$ curl -i https://mt.golfmanager.app/amura/api/tenants \
+$ curl -i https://mt.golfmanager.es/amura/api/tenants \
    -u 5Jvm8sCtVr:b31aT5bScxk46aT
 ```
 
@@ -79,22 +79,45 @@ List available slots.
 
 Method: GET
 
-| Argument   | Type     | Required | Description                             |
-|------------|----------|----------|-----------------------------------------|
-| tenant     | string   | yes      | The start of the search period          |
-| start      | datetime | yes      | The start of the search period          |
-| end        | datetime | yes      | The end of the search period            |
-| slots      | int      | no       | The number of green fees (default is 1) |
-| idResource | int      | no       | To filter slots by a resource           |
+| Argument | Type     | Required | Description                                        |
+|----------|----------|----------|----------------------------------------------------|
+| tenant   | string   | yes      | The start of the search period                     |
+| start    | datetime | yes      | The start of the search period                     |
+| end      | datetime | yes      | The end of the search period                       |
+| slots    | int      | no       | The number of green fees (default is 1)            |
+| tags     | string[] | no       | Array of tags that the reservation types must have |
+
+List of valid tags: 
+
+    18holes
+    9holes
+    tee1
+    tee10
+    buggy
+    trolley
+    electric-trolley
+
 
 Example:
 
 ```bash
-curl https://mt.golfmanager.app/amura/api/searchAvailability \
+curl https://mt.golfmanager.es/amura/api/searchAvailability \
  -u 5Jvm8sCtVr:b31aT5bScxk46aT \
- -d tenant=test \
+ -d tenant=demo \
  -d start="2019-01-23T16:20:00.000Z" \
  -d end="2019-01-23T17:20:00.000Z" \
+ -d slots=2
+```
+
+Example searching only for reservation types that contains 9 or 18 holes:
+
+```bash
+curl https://mt.golfmanager.es/amura/api/searchAvailability \
+ -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -d tenant=demo \
+ -d start="2019-01-23T16:20:00.000Z" \
+ -d end="2019-01-23T17:20:00.000Z" \
+ -d tags=["9holes", "18holes"]
  -d slots=2
 ```
 
@@ -102,15 +125,17 @@ Response:
 
 Returns a list of slots:
 
-| Argument   | Type     | Description                                     |
-|------------|----------|-------------------------------------------------|
-| id         | int      | The reservation type id                         |
-| max        | int      | The maximum number of slots allowed             |
-| min        | int      | The minimum number of slots allowed             |
-| multiple   | int      | In case this type must be reserved in multiples |
-| price      | float    | The price per slot including taxes              |
-| start      | datetime | The date of this slot                           |
-| idResource | int      | The resource of this slot                       |
+| Argument | Type     | Description                                     |
+|----------|----------|-------------------------------------------------|
+| id       | int      | The reservation type id                         |
+| max      | int      | The maximum number of slots allowed             |
+| min      | int      | The minimum number of slots allowed             |
+| multiple | int      | In case this type must be reserved in multiples |
+| price    | float    | The price per slot including taxes              |
+| start    | datetime | The date of this slot                           |
+| tags     | string[] | Array of tags that for this reservation type    |
+
+See above the list of valid tags.
 
 Example:
 
@@ -121,20 +146,20 @@ Example:
     "max": 4,
     "min": null,
     "multiple": null,
-    "name": "Green Fee 18 hoyos",
+    "name": "Green Fee 18 holes",
     "price": 50,
     "start": "2018-11-09T10:00:00+02:00",
-    "idResource": 1
+    "tags": ["18holes", "tee1"]
   },
   {
     "id": 3,
     "max": 4,
     "min": null,
     "multiple": null,
-    "name": "Green Fee 9 hoyos",
+    "name": "Green Fee 9 holes",
     "price": 35,
     "start": "2018-11-09T10:00:00+02:00",
-    "idResource": null
+    "tags": ["9holes"]
   },
   {
     "id": 33,
@@ -144,7 +169,7 @@ Example:
     "name": "Pack 2 GF+ Buggy",
     "price": 59,
     "start": "2018-11-09T10:00:00+02:00",
-    "idResource": null
+    "tags": ["18holes", "buggy]
   }
 ]
 ```
@@ -167,9 +192,9 @@ Arguments: an array of reservation objects. Each reservations must specify:
 Example:
 
 ```bash
-curl https://mt.golfmanager.app/amura/api/makeReservation \
+curl https://mt.golfmanager.es/amura/api/makeReservation \
  -u 5Jvm8sCtVr:b31aT5bScxk46aT \
- -d tenant=test \
+ -d tenant=demo \
  -d 'reservations=[{"idType":3,"start":"2018-11-09T10:00:00%2B02:00"}]'
 ```
 
@@ -203,9 +228,9 @@ Methbod: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.app/amura/api/confirmReservation \
+curl https://mt.golfmanager.es/amura/api/confirmReservation \
  -u 5Jvm8sCtVr:b31aT5bScxk46aT \
- -d tenant=test \
+ -d tenant=demo \
  -d 'ids=[234]'
 ```
 
@@ -229,9 +254,9 @@ Methbod: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.app/amura/api/cancelReservation \
+curl https://mt.golfmanager.es/amura/api/cancelReservation \
  -u 5Jvm8sCtVr:b31aT5bScxk46aT \
- -d tenant=test \
+ -d tenant=demo \
  -d 'ids=[234]'
 ```
 
@@ -256,9 +281,9 @@ Methbod: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.app/amura/api/sale \
+curl https://mt.golfmanager.es/amura/api/sale \
  -u 5Jvm8sCtVr:b31aT5bScxk46aT \
- -d tenant=test \
+ -d tenant=demo \
  -d 'id=34'
 ```
 
@@ -293,7 +318,8 @@ Methbod: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.app/amura/api/tenant \
+curl https://mt.golfmanager.es/amura/api/tenant \
+ -d tenant=demo \
  -u 5Jvm8sCtVr:b31aT5bScxk46aT
 ```
 
@@ -336,9 +362,9 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.app/amura/api/reservations \
+curl https://mt.golfmanager.es/amura/api/reservations \
  -u 5Jvm8sCtVr:b31aT5bScxk46aT \
- -d tenant=test \
+ -d tenant=demo \
  -d start=2018-12-14T08:00:00%2B01:00 \
  -d end=2018-12-14T18:00:00%2B01:00
 ```
@@ -390,9 +416,9 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.app/amura/api/clients \
+curl https://mt.golfmanager.es/amura/api/clients \
  -u 5Jvm8sCtVr:b31aT5bScxk46aT \
- -d tenant=test \
+ -d tenant=demo \
  -d search=a \
  -d limit=500
 ```
@@ -440,9 +466,9 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.app/amura/api/products \
+curl https://mt.golfmanager.es/amura/api/products \
  -u 5Jvm8sCtVr:b31aT5bScxk46aT \
- -d tenant=test \
+ -d tenant=demo \
  -d search=a \
  -d limit=500
 ```
@@ -488,9 +514,9 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.app/amura/api/newSale \
+curl https://mt.golfmanager.es/amura/api/newSale \
  -u 5Jvm8sCtVr:b31aT5bScxk46aT \
- -d tenant=test \
+ -d tenant=demo \
  -d idProduct=1 \
  -d idClient=1 \
  -d parentName="Test platform" \
@@ -532,9 +558,9 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.app/amura/api/cancelSales \
+curl https://mt.golfmanager.es/amura/api/cancelSales \
  -u 5Jvm8sCtVr:b31aT5bScxk46aT \
- -d tenant=test \
+ -d tenant=demo \
  -d idLines=[1,2]
 ```
 
@@ -557,9 +583,9 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.app/amura/api/blockout \
+curl https://mt.golfmanager.es/amura/api/blockout \
  -u 5Jvm8sCtVr:b31aT5bScxk46aT \
- -d tenant=test \
+ -d tenant=demo \
  -d idResource=1 \
  -d start=2018-12-14T08:00:00%2B01:00 \
  -d end=2018-12-14T18:00:00%2B01:00 \
@@ -601,9 +627,9 @@ Method: POST
 Example:
 
 ```bash
-curl https://mt.golfmanager.app/amura/api/blockout \
+curl https://mt.golfmanager.es/amura/api/blockout \
  -u 5Jvm8sCtVr:b31aT5bScxk46aT \
- -d tenant=test \
+ -d tenant=demo \
  -d id=1
 ```
 
