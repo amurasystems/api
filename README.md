@@ -42,9 +42,17 @@ This is equivalent for a tenant timezone "Europe/Madrid":
 
  ## Admin API
  - [Tenant](#tenant)
+ - [Reservation types](#reservationtypes)
+ - [Resources](#resources)
+ - [Teesheet Rules](#teesheetrules)
  - [Reservations](#reservations)
  - [Clients](#clients)
+ - [ClientGroups](#clientgroups)
  - [Products](#products)
+ - [Prices](#prices)
+ - [Save price](#saveprice)
+ - [Discounts](#discounts)
+ - [Save discount](#savediscount)
  - [New sale](#newSale)
  - [Cancel sales](#cancelSales)
  - [Blockout](#blockout)
@@ -82,7 +90,7 @@ Method: GET
 
 | Argument | Type     | Required | Description                                        |
 |----------|----------|----------|----------------------------------------------------|
-| tenant   | string   | yes      | The start of the search period                     |
+| tenant   | string   | yes      |                                                    |
 | start    | datetime | yes      | The start of the search period                     |
 | end      | datetime | yes      | The end of the search period                       |
 | slots    | int      | no       | The number of green fees (default is 1)            |
@@ -390,6 +398,25 @@ Response:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Admin
+
+
+
+
+
 <h2 id="tenant">Tenant</h2>
 
 Returns general information about the tenant like phone, address, etc...
@@ -428,17 +455,322 @@ Example:
 ```
 
 
-### Reservations
 
-List clients
+
+
+<h2 id="reservationtypes">Reservation Types</h2>
+
+List reservation types
 
 Method: GET
 
-| Argument | Type     | Required | Description                |
-|----------|----------|----------|----------------------------|
-| tenant   | string   | yes      | Tenant name                |
-| start    | datetime | yes      | Start date and time filter |
-| end      | datetime | yes      | End date and time filter   |
+| Argument | Type   | Required | Description                                                 |
+|----------|--------|----------|-------------------------------------------------------------|
+| tenant   | string | yes      | Tenant name                                                 |
+| offset   | int    | no       | The offset of the first row to be returned                  |
+| count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/amura/api/reservationtypes \
+ -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -d tenant=demo
+```
+
+Response:
+
+Example:
+
+```json
+[
+    {
+        "clientGroupName": null,
+        "description": null,
+        "end": null,
+        "id": 1,
+        "idClientGroup": null,
+        "idProduct": 1,
+        "idResource": 1,
+        "idResourceType": 1,
+        "max": null,
+        "min": null,
+        "multiple": null,
+        "name": "GF18",
+        "online": true,
+        "priority": 0,
+        "productName": "Test Product",
+        "resourceName": "Tee test",
+        "resourceTypeName": "Green fees",
+        "start": null,
+        "tags": "18holes",
+        "weekDays": 127
+    }
+]
+```
+
+<h2 id="resources">Resources</h2>
+
+List resources
+
+Method: GET
+
+| Argument | Type   | Required | Description                                                 |
+|----------|--------|----------|-------------------------------------------------------------|
+| tenant   | string | yes      | Tenant name                                                 |
+| offset   | int    | no       | The offset of the first row to be returned                  |
+| count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/amura/api/resources \
+ -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -d tenant=demo
+```
+
+Response:
+
+Example:
+
+```json
+[
+    {
+        "id": 1,
+        "idResourceType": 1,
+        "name": "Tee 1",
+        "resourceTypeName": "Green fees"
+    },
+    {
+        "id": 2,
+        "idResourceType": 1,
+        "name": "Tee 10",
+        "resourceTypeName": "Green fees"
+    }
+]
+```
+
+
+<h2 id="teesheetRules">Teesheet Rules</h2>
+
+List slots
+
+Method: GET
+
+| Argument | Type     | Required | Description                    |
+|----------|----------|----------|--------------------------------|
+| tenant   | string   | yes      | Tenant name                    |
+| start    | datetime | yes      | The start of the search period |
+| end      | datetime | yes      | The end of the search period   |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/amura/api/slots \
+ -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -d tenant=demo \
+ -d start="2019-01-01T23:00:00.000Z" \
+ -d end="2019-01-02T17:23:00.000Z" \
+```
+
+Response:
+
+Example:
+
+```json
+{
+    "resourceTypes": [
+        {
+            "id": 2,
+            "name": "Buggies",
+            "online": false,
+            "slots": 2,
+            "stock": true
+        },
+        {
+            "id": 1,
+            "name": "Green fees",
+            "online": false,
+            "slots": 4,
+            "stock": false
+        }
+    ],
+    "resources": [
+        {
+            "id": 1,
+            "name": "Tee 1",
+            "notOnline": false
+        }
+    ],
+    "slots": [
+        {
+            "day": "2019-01-01",
+            "intervals": [
+                {
+                    "end": null,
+                    "endTime": "14:00",
+                    "id": 1,
+                    "idResourceType": 1,
+                    "name": "test",
+                    "online": false,
+                    "priority": 0,
+                    "start": null,
+                    "startTime": "09:00",
+                    "weekDays": 127
+                },
+                {
+                    "end": null,
+                    "endTime": "22:00",
+                    "id": 2,
+                    "idResourceType": 1,
+                    "name": "test",
+                    "online": false,
+                    "priority": 0,
+                    "start": null,
+                    "startTime": "14:00",
+                    "weekDays": 127
+                }
+            ],
+            "types": [
+                {
+                    "end": null,
+                    "endTime": null,
+                    "id": 1,
+                    "idResource": 1,
+                    "idResourceType": 1,
+                    "max": null,
+                    "min": null,
+                    "multiple": null,
+                    "name": "GF18",
+                    "online": false,
+                    "priority": 0,
+                    "start": null,
+                    "startTime": null,
+                    "tags": [
+                        "18holes"
+                    ],
+                    "weekDays": 127
+                },
+                {
+                    "end": null,
+                    "endTime": null,
+                    "id": 2,
+                    "idResource": null,
+                    "idResourceType": 1,
+                    "max": null,
+                    "min": null,
+                    "multiple": null,
+                    "name": "GF9",
+                    "online": false,
+                    "priority": 0,
+                    "start": null,
+                    "startTime": null,
+                    "tags": [
+                        "9holes"
+                    ],
+                    "weekDays": 127
+                }
+            ]
+        },
+        {
+            "day": "2019-01-02",
+            "intervals": [
+                {
+                    "end": null,
+                    "endTime": "14:00",
+                    "id": 1,
+                    "idResourceType": 1,
+                    "name": "test",
+                    "online": false,
+                    "priority": 0,
+                    "start": null,
+                    "startTime": "09:00",
+                    "weekDays": 127
+                },
+                {
+                    "end": null,
+                    "endTime": "22:00",
+                    "id": 2,
+                    "idResourceType": 1,
+                    "name": "test",
+                    "online": false,
+                    "priority": 0,
+                    "start": null,
+                    "startTime": "14:00",
+                    "weekDays": 127
+                }
+            ],
+            "types": [
+                {
+                    "end": null,
+                    "endTime": null,
+                    "id": 1,
+                    "idResource": 1,
+                    "idResourceType": 1,
+                    "max": null,
+                    "min": null,
+                    "multiple": null,
+                    "name": "GF18",
+                    "online": false,
+                    "priority": 0,
+                    "start": null,
+                    "startTime": null,
+                    "tags": [
+                        "18holes"
+                    ],
+                    "weekDays": 127
+                },
+                {
+                    "end": null,
+                    "endTime": null,
+                    "id": 2,
+                    "idResource": null,
+                    "idResourceType": 1,
+                    "max": null,
+                    "min": null,
+                    "multiple": null,
+                    "name": "GF9",
+                    "online": false,
+                    "priority": 0,
+                    "start": null,
+                    "startTime": null,
+                    "tags": [
+                        "9holes"
+                    ],
+                    "weekDays": 127
+                }
+            ]
+        }
+    ],
+    "stocks": [
+        {
+            "end": null,
+            "id": 1,
+            "idResourceType": 2,
+            "name": "Summer",
+            "priority": 0,
+            "start": null,
+            "stock": 25
+        }
+    ]
+}
+```
+
+
+
+
+
+### Reservations
+
+List reservations
+
+Method: GET
+
+| Argument | Type     | Required | Description                       |
+|----------|----------|----------|-----------------------------------|
+| tenant   | string   | yes      | Tenant name                       |
+| start    | datetime | yes      | Start date and time search period |
+| end      | datetime | yes      | End date and time search period   |
 
 Example:
 
@@ -465,19 +797,58 @@ Example:
         "end": "2019-01-25T17:04:49.25905354Z",
         "id": 1,
         "idClientGroup": 1,
+        "idProduct": 34,
         "idResource": 3,
         "idType": 1,
         "noShow": 0,
         "online": 0,
         "paid": 0,
-        "start": "2019-01-25T16:54:49.25905354Z"
-    },
-    ...
+        "start": "2019-01-25T16:54:49.25905354Z",
+        "total": 50
+    }
 ]
 ```
 
 
 
+
+
+
+
+
+
+<h2 id="clientgroups">Client groups</h2>
+
+List client groups
+
+Method: GET
+
+| Argument | Type   | Required | Description                                                 |
+|----------|--------|----------|-------------------------------------------------------------|
+| tenant   | string | yes      | Tenant name                                                 |
+| offset   | int    | no       | The offset of the first row to be returned                  |
+| count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/amura/api/clientGroups \
+ -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -d tenant=demo
+```
+
+Response:
+
+Example:
+
+```json
+[
+    {
+        "id": 1,
+        "name": "Agents"
+    }
+]
+```
 
 
 
@@ -568,15 +939,191 @@ Example:
 ```json
 [
   {
+    "basePercent": null,
     "id": 1,
-    "name": "Test product"
-  },
-  {
-    "id": 2,
-    "name": "Test product 2"
+    "idBaseProduct": null,
+    "idSubfamily": 1,
+    "name": "Test Product 1",
+    "price": 50
   }
 ]
 ```
+
+
+### Prices
+
+List prices
+
+Method: GET
+
+| Argument | Type   | Required | Description                                                 |
+|----------|--------|----------|-------------------------------------------------------------|
+| tenant   | string | yes      | Tenant name                                                 |
+| offset   | int    | no       | The offset of the first row to be returned                  |
+| count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/amura/api/prices \
+ -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -d tenant=demo
+```
+
+Response:
+
+Example:
+
+```json
+[
+    {
+        "channel": null,
+        "end": null,
+        "endTime": null,
+        "holiday": false,
+        "id": 1,
+        "idAgeGroup": null,
+        "idClient": null,
+        "idClientGroup": null,
+        "idFamiliySales": null,
+        "idMembership": null,
+        "idProduct": 1,
+        "maxAdvance": null,
+        "maxSales": null,
+        "minAdvance": null,
+        "minSales": null,
+        "name": "Twilight",
+        "price": 100,
+        "priority": 0,
+        "start": null,
+        "startTime": null,
+        "weekdays": 0
+    }
+]
+```
+
+
+<h2 id="saveprice">Save price</h2>
+
+Save a price. If it has an id it will update it, otherways it will create a new one.
+
+Method: GET
+
+| Argument | Type | Required | Description        |
+|----------|------|----------|--------------------|
+| data     | json | yes      | The object as json |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/amura/api/savePrice \
+ -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -d tenant=demo \
+ -d data="{\"idProduct\":1,\"name\":\"Twilight\",\"price\":100,\"priority\":0,\"weekDays\":127}"
+```
+
+Response:
+
+The ID if it is created. Nothing if it is an update.
+
+
+
+
+### Discounts
+
+List discounts
+
+Method: GET
+
+| Argument | Type   | Required | Description                                                 |
+|----------|--------|----------|-------------------------------------------------------------|
+| tenant   | string | yes      | Tenant name                                                 |
+| offset   | int    | no       | The offset of the first row to be returned                  |
+| count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/amura/api/discounts \
+ -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -d tenant=demo
+```
+
+Response:
+
+Example:
+
+```json
+[
+    {
+        "channel": null,
+        "end": null,
+        "endTime": null,
+        "holiday": false,
+        "id": 1,
+        "idAgeGroup": null,
+        "idClient": null,
+        "idClientGroup": null,
+        "idFamiliySales": null,
+        "idMembership": null,
+        "idProduct": 1,
+        "maxAdvance": null,
+        "maxSales": null,
+        "minAdvance": null,
+        "minSales": null,
+        "name": "Twilight",
+        "percent": 10,
+        "priority": 0,
+        "rounding": null,
+        "start": null,
+        "startTime": null,
+        "weekdays": 0
+    }
+]
+```
+
+
+
+
+
+<h2 id="savediscount">Save discount</h2>
+
+Save a discount. If it has an id it will update it, otherways it will create a new one.
+
+Method: GET
+
+| Argument | Type | Required | Description        |
+|----------|------|----------|--------------------|
+| data     | json | yes      | The object as json |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/amura/api/saveDiscount \
+ -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -d tenant=demo \
+ -d data="{\"idProduct\":1,\"name\":\"Twilight\",\"percent\":100,\"priority\":0,\"weekDays\":127}"
+```
+
+Response:
+
+The ID if it is created. Nothing if it is an update.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### newSale
 
