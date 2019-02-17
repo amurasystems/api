@@ -566,7 +566,7 @@ Method: GET
 Example:
 
 ```bash
-curl https://mt.golfmanager.es/amura/api/slots \
+curl https://mt.golfmanager.es/amura/api/teesheetRules \
  -u 5Jvm8sCtVr:b31aT5bScxk46aT \
  -d tenant=demo \
  -d start="2019-01-01T23:00:00.000Z" \
