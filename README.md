@@ -570,7 +570,7 @@ curl https://mt.golfmanager.es/amura/api/slots \
  -u 5Jvm8sCtVr:b31aT5bScxk46aT \
  -d tenant=demo \
  -d start="2019-01-01T23:00:00.000Z" \
- -d end="2019-01-02T17:23:00.000Z" \
+ -d end="2019-01-02T17:23:00.000Z"
 ```
 
 Response:
