@@ -1007,7 +1007,7 @@ Example:
 
 Save a price. If it has an id it will update it, otherways it will create a new one.
 
-Method: GET
+Method: POST
 
 | Argument | Type | Required | Description        |
 |----------|------|----------|--------------------|
@@ -1090,7 +1090,7 @@ Example:
 
 Save a discount. If it has an id it will update it, otherways it will create a new one.
 
-Method: GET
+Method: POST
 
 | Argument | Type | Required | Description        |
 |----------|------|----------|--------------------|
@@ -1129,7 +1129,7 @@ The ID if it is created. Nothing if it is an update.
 
 Creates new sale
 
-Method: GET
+Method: POST
 
 | Argument   | Type   | Required | Description    |
 |------------|--------|----------|----------------|
