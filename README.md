@@ -136,7 +136,7 @@ Returns a list of slots:
 
 | Argument               | Type          | Optional | Description                                                          |
 |------------------------|---------------|----------|----------------------------------------------------------------------|
-| id                     | int           | no       | The reservation type id.                                             |
+| idType                 | int           | no       | The reservation type id.                                             |
 | max                    | int           | no       | The maximum number of slots allowed.                                 |
 | min                    | int           | no       | The minimum number of slots allowed.                                 |
 | multiple               | int           | no       | In case this type must be reserved in multiples.                     |
@@ -158,7 +158,7 @@ Example:
 ```json
 [
   {
-    "id": 1,
+    "idType": 1,
     "max": 4,
     "min": null,
     "multiple": null,
@@ -171,7 +171,7 @@ Example:
     ]
   },
   {
-    "id": 3,
+    "idType": 3,
     "max": 4,
     "min": null,
     "multiple": null,
@@ -183,7 +183,7 @@ Example:
     ]
   },
   {
-    "id": 33,
+    "idType": 33,
     "max": 4,
     "min": 2,
     "multiple": 2,
