@@ -270,13 +270,13 @@ Methbod: POST
 
 Arguments: an array of reservation objects. Each reservations must specify:
 
-| Argument | Type     | Required | Description                                                                   |
-|----------|----------|----------|-------------------------------------------------------------------------------|
-| idType   | int      | yes      | The "id" field obtained from searchAvailability. This is the reservation type |
-| start    | datetime | yes      | The date of this slot                                                         |
-| timeout  | datetime | no       | The date when it will be released if it is not confirmed                      |
-| name     | string   | no       | The client's name                                                             |
-| email    | string   | no       | The client's email                                                            |
+| Argument | Type     | Required | Description                                              |
+|----------|----------|----------|----------------------------------------------------------|
+| idType   | int      | yes      | The reservation type                                     |
+| start    | datetime | yes      | The date of this slot                                    |
+| timeout  | datetime | no       | The date when it will be released if it is not confirmed |
+| name     | string   | no       | The client's name                                        |
+| email    | string   | no       | The client's email                                       |
 
 Example:
 
