@@ -35,6 +35,7 @@ This is equivalent for a tenant timezone "Europe/Madrid":
  - [Tenant](#tenant)
  - [Search availability](#availability)
  - [Availability types](#availabilitytypes)
+ - [Resources](#resources)
  - [Make reservations](#makereservations)
  - [Confirm reservations](#confirmreservations)
  - [Cancel reservations](#cancelreservations)
@@ -88,13 +89,14 @@ List available slots.
 
 Method: GET
 
-| Argument | Type     | Required | Description                                        |
-|----------|----------|----------|----------------------------------------------------|
-| tenant   | string   | yes      |                                                    |
-| start    | datetime | yes      | The start of the search period                     |
-| end      | datetime | yes      | The end of the search period                       |
-| slots    | int      | no       | The number of green fees (default is 1)            |
-| tags     | string[] | no       | Array of tags that the reservation types must have |
+| Argument   | Type     | Required | Description                                                                                |
+|------------|----------|----------|--------------------------------------------------------------------------------------------|
+| tenant     | string   | yes      |                                                                                            |
+| start      | datetime | yes      | The start of the search period                                                             |
+| end        | datetime | yes      | The end of the search period                                                               |
+| slots      | int      | no       | The number of green fees (default is 1)                                                    |
+| tags       | string[] | no       | Array of tags that the reservation types must have                                         |
+| idResource | int      | no       | The resource id returned from /amura/api/resources to limit results to a specific resource |
 
 List of valid tags: 
 
@@ -270,13 +272,14 @@ Methbod: POST
 
 Arguments: an array of reservation objects. Each reservations must specify:
 
-| Argument | Type     | Required | Description                                              |
-|----------|----------|----------|----------------------------------------------------------|
-| idType   | int      | yes      | The reservation type                                     |
-| start    | datetime | yes      | The date of this slot                                    |
-| timeout  | datetime | no       | The date when it will be released if it is not confirmed |
-| name     | string   | no       | The client's name                                        |
-| email    | string   | no       | The client's email                                       |
+| Argument   | Type     | Required | Description                                                                     |
+|------------|----------|----------|---------------------------------------------------------------------------------|
+| idType     | int      | yes      | The reservation type                                                            |
+| start      | datetime | yes      | The date of this slot                                                           |
+| timeout    | datetime | no       | The date when it will be released if it is not confirmed                        |
+| idResource | int      | no       | The resource id returned from /amura/api/resources to force a specific resource |
+| name       | string   | no       | The client's name                                                               |
+| email      | string   | no       | The client's email                                                              |
 
 Example:
 
