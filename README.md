@@ -542,13 +542,19 @@ Example:
         "id": 1,
         "idResourceType": 1,
         "name": "Tee 1",
-        "resourceTypeName": "Green fees"
+        "resourceTypeName": "Green fees",
+        "tags": [
+            "tee1"
+        ]
     },
     {
         "id": 2,
         "idResourceType": 1,
         "name": "Tee 10",
-        "resourceTypeName": "Green fees"
+        "resourceTypeName": "Green fees",
+        "tags": [
+            "tee10"
+        ]
     }
 ]
 ```
