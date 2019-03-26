@@ -16,15 +16,14 @@ Our API raise exceptions for many reasons, such as a failed charge, invalid para
 
 ## Dates
 
-The date format is ISO 8601 and can be passed in UTC or in the local time of the tenant. 
+The date format is ISO 8601 and can be passed in the local time of the tenant or in UTC. 
 
 For example:
 
-2018-10-09T09:00:00.000Z
+2018-10-09T09:00:00
 
-This is equivalent for a tenant timezone "Europe/Madrid": 
+2018-10-09T07:00:00.000Z
 
-2018-11-09T10:00:00+01:00 
 
 ---------------------------
 
@@ -115,8 +114,8 @@ Example:
 curl https://mt.golfmanager.es/amura/api/searchAvailability \
  -u 5Jvm8sCtVr:b31aT5bScxk46aT \
  -d tenant=demo \
- -d start="2019-01-23T16:20:00.000Z" \
- -d end="2019-01-23T17:20:00.000Z" \
+ -d start="2019-04-23T07:00:00" \
+ -d end="2019-04-23T11:00:00" \
  -d slots=2
 ```
 
@@ -126,8 +125,8 @@ Example searching only for reservations that contain 9 or 18 holes:
 curl https://mt.golfmanager.es/amura/api/searchAvailability \
  -u 5Jvm8sCtVr:b31aT5bScxk46aT \
  -d tenant=demo \
- -d start="2019-01-23T16:20:00.000Z" \
- -d end="2019-01-23T17:20:00.000Z" \
+ -d start="2019-04-23T07:00:00" \
+ -d end="2019-04-23T11:00:00" \
  -d tags=["9holes", "18holes"]
  -d slots=2
 ```
@@ -166,7 +165,7 @@ Example:
     "multiple": null,
     "name": "Green Fee 18 holes",
     "price": 50,
-    "start": "2018-11-09T10:00:00+02:00",
+    "start": "2018-11-09T10:00:00",
     "tags": [
       "18holes", 
       "tee1"
@@ -179,7 +178,7 @@ Example:
     "multiple": null,
     "name": "Green Fee 9 holes",
     "price": 35,
-    "start": "2018-11-09T10:00:00+02:00",
+    "start": "2018-11-09T10:00:00",
     "tags": [
       "9holes"
     ]
@@ -191,7 +190,7 @@ Example:
     "multiple": 2,
     "name": "Pack 2 GF+ Buggy",
     "price": 59,
-    "start": "2018-11-09T10:00:00+02:00",
+    "start": "2018-11-09T10:00:00",
     "tags": [
       "18holes", 
       "buggy"
@@ -299,7 +298,7 @@ Example:
 ```json
 {  
    "reservations": [
-     { "id":234, "idType":3, "start":"2018-11-09T10:00:00+02:00" }
+     { "id":234, "idType":3, "start":"2018-11-09T10:00:00" }
    ],
    "cart":{  
       "idSale":5448,
