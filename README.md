@@ -42,6 +42,7 @@ For example:
 
  ## Admin API
  - [Tenant](#tenant)
+ - [Search availability](#availability)
  - [Reservation types](#reservationtypes)
  - [Resources](#resources)
  - [Teesheet Rules](#teesheetrules)
@@ -51,6 +52,7 @@ For example:
  - [Products](#products)
  - [Prices](#prices)
  - [Save price](#saveprice)
+ - [Delete prices](#deleteprices)
  - [Discounts](#discounts)
  - [Save discount](#savediscount)
  - [New sale](#newSale)
@@ -144,6 +146,9 @@ Returns a list of slots:
 | price                  | float         | no       | The price per slot including taxes.                                  |
 | start                  | datetime      | no       | The date of this slot.                                               |
 | tags                   | string[]      | no       | Array of tags to filter types.                                       |
+| idResource             | prepayPercent | yes      | id of the available resource (Tee1 or Tee10 for example).            |
+| resourceName           | prepayPercent | yes      | name of the available resource.                                      |
+| resourceTags           | prepayPercent | yes      | tags of the available resource.                                      |
 | minCancelAdvance       | datetime      | yes      | Limit date to cancel the reservation.                                |
 | maxReservationsPerSale | int           | yes      | The maximum number of reservations in a sale.                        |
 | maxReservationsPerDay  | int           | yes      | The maximum number of reservations that can be made in the same day. |
@@ -166,6 +171,9 @@ Example:
     "name": "Green Fee 18 holes",
     "price": 50,
     "start": "2018-11-09T10:00:00",
+    "idResource": 1,
+    "resourceName": "Tee 1",
+    "resourceTags": [],
     "tags": [
       "18holes", 
       "tee1"
@@ -179,6 +187,9 @@ Example:
     "name": "Green Fee 9 holes",
     "price": 35,
     "start": "2018-11-09T10:00:00",
+    "idResource": 1,
+    "resourceName": "Tee 1",
+    "resourceTags": [],
     "tags": [
       "9holes"
     ]
@@ -191,6 +202,9 @@ Example:
     "name": "Pack 2 GF+ Buggy",
     "price": 59,
     "start": "2018-11-09T10:00:00",
+    "idResource": 2,
+    "resourceName": "Tee 10",
+    "resourceTags": [],
     "tags": [
       "18holes", 
       "buggy"
@@ -469,6 +483,7 @@ Method: GET
 | Argument | Type   | Required | Description                                                 |
 |----------|--------|----------|-------------------------------------------------------------|
 | tenant   | string | yes      | Tenant name                                                 |
+| ids      | int[]  | no       | The id or ids to be fetched                                 |
 | offset   | int    | no       | The offset of the first row to be returned                  |
 | count    | int    | no       | The maximum number of rows to be returned. (default is 100) |
 
@@ -487,11 +502,9 @@ Example:
 ```json
 [
     {
-        "clientGroupName": null,
         "description": null,
         "end": null,
         "id": 1,
-        "idClientGroup": null,
         "idProduct": 1,
         "idResource": 1,
         "idResourceType": 1,
@@ -499,14 +512,14 @@ Example:
         "min": null,
         "multiple": null,
         "name": "GF18",
-        "online": true,
-        "priority": 0,
         "productName": "Test Product",
         "resourceName": "Tee test",
         "resourceTypeName": "Green fees",
         "start": null,
         "tags": "18holes",
-        "weekDays": 127
+        "weekDays": 127, 
+        "resources": [],
+        "extras": []
     }
 ]
 ```
@@ -657,7 +670,8 @@ Example:
                     "tags": [
                         "18holes"
                     ],
-                    "weekDays": 127
+                    "weekDays": 127,
+                    "duration": 10
                 },
                 {
                     "end": null,
@@ -1034,7 +1048,25 @@ Response:
 
 The ID if it is created. Nothing if it is an update.
 
+<h2 id="deleteprices">Delete prices</h2>
 
+Delete multiple prices
+
+Method: POST
+
+| Argument | Type   | Required | Description              |
+|----------|--------|----------|--------------------------|
+| tenant   | string | yes      | Tenant name              |
+| idPrices | int[]  | yes      | Array with the price ids |
+
+Example:
+
+```bash
+curl https://mt.golfmanager.es/amura/api/deletePrices \
+ -u 5Jvm8sCtVr:b31aT5bScxk46aT \
+ -d tenant=demo \
+ -d idPrices=[1,2]
+```
 
 
 ### Discounts
