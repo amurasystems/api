@@ -14,7 +14,7 @@ Prevent making reservations on past dates
 Type: true/false              
 Set saleline dueDate as createDate or useDate by default
 
-**billing.cancelInvoiceTickets**
+**billing.cancelInvoiceTickets**  
 Type: true/false  
 If the system cancels existing tickets when generating an invoice.
 
