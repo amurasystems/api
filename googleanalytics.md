@@ -46,7 +46,7 @@ Al eliminar una venta del carrito
 S.addEventListener("eshop.deleteLine", function(event) {
     gtag('event', 'remove_from_cart', {
         'value': event.line.productName,
-        'transaction_id': event.cart.idSale,
+        'transaction_id': event.line.id,
     })
 })
 ```
