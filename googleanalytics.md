@@ -17,7 +17,7 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date())
 
 // Se ejecuta cada vez que se muestra una página
-S.addEventListener("setView", event => {
+S.addEventListener("setView", function(event) {
     gtag('config', 'UA-XXXXXXXXXX-1', {
         'page_path': event.path
     })
@@ -31,7 +31,7 @@ En el campo Global Code se puede añadir código para enviar eventos. Por ejempl
 Al confirmar una venta
 
 ```javascript
-S.addEventListener("eshop.saleConfirm", event => {
+S.addEventListener("eshop.saleConfirm", function(event) {
     gtag('event', 'purchase', {
         'value': event.cart.lines.sum(t => t.total),
         'transaction_id': event.cart.idSale,
@@ -43,7 +43,7 @@ S.addEventListener("eshop.saleConfirm", event => {
 Al eliminar una venta del carrito
 
 ```javascript
-S.addEventListener("eshop.deleteLine", event => {
+S.addEventListener("eshop.deleteLine", function(event) {
     gtag('event', 'remove_from_cart', {
         'value': event.line.productName,
         'transaction_id': event.cart.idSale,
@@ -54,7 +54,7 @@ S.addEventListener("eshop.deleteLine", event => {
 Al mostrar un error al confirmar la venta, por ejemplo "tarjeta sin fondos"
 
 ```javascript
-S.addEventListener("eshop.saleConfirmError", event => {
+S.addEventListener("eshop.saleConfirmError", function(event) {
     gtag('event', 'saleConfirmError', {
         'value': event.error,
         'transaction_id': event.cart.idSale,
