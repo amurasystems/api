@@ -43,7 +43,7 @@ Eventos al confirmar una venta:
 
 ```javascript
 // Se ejecuta cuando se confirma una compra 
-hooks.add("AmuraEshopSaleConfirmed", null, cart => {
+hooks.add("eshopSaleConfirmed", null, cart => {
     gtag('event', 'purchase', {
         'value': cart.lines.sum(t => t.total),
         'transaction_id': cart.idSale,
