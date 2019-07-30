@@ -16,44 +16,49 @@ window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date())
 
-// Se ejecuta cada vez que cambias de página
-S.addEventListener("executedAction", event => {
+// Se ejecuta cada vez que se muestra una página
+S.addEventListener("setView", event => {
     gtag('config', 'UA-XXXXXXXXXX-1', {
-        'page_path': event.url
+        'page_path': event.path
     })
 })
 ```
 
-Para registrar un evento al pedir una página:
+## Eventos
+
+En el campo Global Code se puede añadir código para enviar eventos. Por ejemplo:
+
+Al confirmar una venta
 
 ```javascript
-// Se ejecuta cada vez que cambia de página
-S.addEventListener("executedAction", event => {
-    gtag('config', 'UA-XXXXXXXXXX-1', {
-        'page_path': event.url
-    })
-
-    if(event.url.hasPrefix("/consumer/eshop/cart")) {
-        gtag('event', 'begin_checkout')
-    }
-})
-```
-
-Eventos al confirmar una venta:
-
-```javascript
-// Se ejecuta cuando se confirma una compra 
-hooks.add("eshopSaleConfirmed", null, cart => {
+S.addEventListener("eshop.saleConfirm", event => {
     gtag('event', 'purchase', {
-        'value': cart.lines.sum(t => t.total),
-        'transaction_id': cart.idSale,
+        'value': event.cart.lines.sum(t => t.total),
+        'transaction_id': event.cart.idSale,
         'currency': 'EUR',
     })
+})
+```
 
-    gtag('event', 'conversion', {
-        'value': cart.lines.sum(t => t.total),
+Al eliminar una venta del carrito
+
+```javascript
+S.addEventListener("eshop.deleteLine", event => {
+    gtag('event', 'remove_from_cart', {
+        'value': event.line.productName,
+        'transaction_id': event.cart.idSale,
+    })
+})
+```
+
+Al mostrar un error al confirmar la venta, por ejemplo "tarjeta sin fondos"
+
+```javascript
+S.addEventListener("eshop.saleConfirmError", event => {
+    gtag('event', 'saleConfirmError', {
+        'value': event.error,
+        'transaction_id': event.cart.idSale,
         'currency': 'EUR',
-        'transaction_id': cart.idSale
     })
 })
 ```
