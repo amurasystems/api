@@ -83,27 +83,19 @@ S.addEventListener("setView", function(event) {
 S.addEventListener("eshop.saleConfirm", function(event) {
     var cart = event.cart
     var lines = cart.lines
-
-    // To inspect the cart object:
-    // console.log(cart)
-
+  
+    // Check: https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce
     let items = []    
-    for(var i = 0; i < lines; i++) {
+    for(var i = 0, l = lines.length; i < l; i++) {
         var line = lines[i]
-        switch(line.idProduct) {
-            case 49: // GF 18
-            case 55: // CARRO ELECTRICO 18
-                items.push({
-                    id: line.id,
-                    name: line.description,
-                    list_position: 1,
-                    quantity: line.quantity,
-                    price: line.total // or line.price for unit price
-                })
-                break
-        }
+        items.push({
+            id: line.id,
+            name: line.productName,
+            list_position: 1,
+            quantity: line.quantity,
+            price: line.total // or line.price for unit price
+        })
     }
-
     gtag('event', 'purchase', {
         value: cart.total,
         currency: 'EUR',
