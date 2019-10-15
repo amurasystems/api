@@ -96,6 +96,7 @@ S.addEventListener("eshop.saleConfirm", function(event) {
             price: line.total // or line.price for unit price
         })
     }
+    
     gtag('event', 'purchase', {
         value: cart.total,
         currency: 'EUR',
