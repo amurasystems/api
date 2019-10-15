@@ -27,8 +27,8 @@ Value: true/false
 If the system cancels existing tickets when generating an invoice.
 
 **eshop.thankyouPage**
-Value: a url
-Plugin: consumer
-The url to redirect to after a successful purchase.
+Value: a url  
+Plugin: consumer  
+The url to redirect to after a successful purchase.  
 
 
