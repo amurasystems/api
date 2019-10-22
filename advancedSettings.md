@@ -10,9 +10,17 @@ Prevent remember the reservation type for a client in the timetable
 Value: true/false  
 Prevent making reservations on past dates
 
-**consumer.ebookings.membershipMode**  
+**bookings.allowAnyName**  
+Value: true/false  
+Allow anonymous reservations in admin
+
+**ebookings.membershipMode**  
 Value: true/false  
 Show the bookings view in membership mode.
+
+**ebookings.showPastHours**  
+Value: true/false  
+Show past hours when browsing the current day.
 
 **billing.preventPastChanges**  
 Value: true/false  
