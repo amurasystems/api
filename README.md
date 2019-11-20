@@ -898,20 +898,35 @@ Example:
 ```json
 [
     {
-        "checkin": 0,
+        "beneficiaryName": "John Carmack",
+        "beneficiaryNationality": "USA",
+        "checkin": false,
+        "clientName": "ID Software INC",
+        "clientNationality": "Spain",
         "confirmDate": null,
-        "createDate": "2019-01-25T15:54:49.25924646Z",
-        "end": "2019-01-25T17:04:49.25905354Z",
+        "createDate": "2019-11-20T17:58:46.204610474Z",
+        "email": "foo@bar.es",
+        "end": "2019-11-20T19:08:46.203014019Z",
+        "familyName": "Golf",
         "id": 1,
-        "idClientGroup": 1,
-        "idProduct": 34,
+        "idBeneficiary": 2,
+        "idClient": 1,
+        "idClientGroup": null,
+        "idFamily": 1,
+        "idProduct": 1,
         "idResource": 3,
+        "idSale": 1209,
+        "idSaleLine": 12358,
+        "idSubfamily": 1,
         "idType": 1,
-        "noShow": 0,
-        "online": 0,
-        "paid": 0,
-        "start": "2019-01-25T16:54:49.25905354Z",
-        "total": 50
+        "name": null,
+        "noShow": false,
+        "online": false,
+        "paid": false,
+        "productName": "GF 18",
+        "start": "2019-11-20T18:58:46.203014019Z",
+        "subfamilyName": "Gree fees",
+        "total": 150
     }
 ]
 ```
