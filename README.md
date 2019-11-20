@@ -898,9 +898,11 @@ Example:
 ```json
 [
     {
+        "beneficiaryGroupName": "Visitor",
         "beneficiaryName": "John Carmack",
         "beneficiaryNationality": "USA",
         "checkin": false,
+        "clientGroupName": "TTOO A Crédito",
         "clientName": "ID Software INC",
         "clientNationality": "Spain",
         "confirmDate": null,
@@ -910,8 +912,9 @@ Example:
         "familyName": "Golf",
         "id": 1,
         "idBeneficiary": 2,
+        "idBeneficiaryGroup": 2,
         "idClient": 1,
-        "idClientGroup": null,
+        "idClientGroup": 1,
         "idFamily": 1,
         "idProduct": 1,
         "idResource": 3,
