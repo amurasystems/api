@@ -899,15 +899,12 @@ Example:
 [
     {
         "beneficiaryGroupName": "Visitor",
-        "beneficiaryName": "John Carmack",
         "beneficiaryNationality": "USA",
         "checkin": false,
         "clientGroupName": "TTOO A Crédito",
-        "clientName": "ID Software INC",
         "clientNationality": "Spain",
         "confirmDate": null,
         "createDate": "2019-11-20T17:58:46.204610474Z",
-        "email": "foo@bar.es",
         "end": "2019-11-20T19:08:46.203014019Z",
         "familyName": "Golf",
         "id": 1,
@@ -922,11 +919,11 @@ Example:
         "idSaleLine": 12358,
         "idSubfamily": 1,
         "idType": 1,
-        "name": null,
         "noShow": false,
         "online": false,
         "paid": false,
         "productName": "GF 18",
+        "reference": "HJK30",
         "start": "2019-11-20T18:58:46.203014019Z",
         "subfamilyName": "Gree fees",
         "total": 150
