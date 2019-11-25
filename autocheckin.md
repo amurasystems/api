@@ -1,7 +1,9 @@
        
 # Auto Check-in
 
-The function signature:
+## Include the code in email templates
+
+### The function signature:
 
 ```typescript
 export function getEmailButtons(sale: billing.Sale, style?: string) 
@@ -11,9 +13,11 @@ To call it from a template:
 
 ```html
 <%== runtime.exec('autocheckin.getEmailButtons', model.sale) %>
-```
+``` 
 
-A complete example with styles:    
+## A complete example with styles: 
+
+![](autocheckin.png)   
 
 ```html
 <h1 style="background-color: #4382cc; color: #fff; padding: 50px 15px 70px 15px; margin: 0;">
@@ -26,6 +30,3 @@ A complete example with styles:
     <p style="font-size: 0.5em;">¡Listo para ir al tee del 1!</p>
 </h1>
 ```
-
-
-![](autocheckin.png)
