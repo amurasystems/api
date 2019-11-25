@@ -14,8 +14,6 @@ To call it from a template:
 
 A complete example with styles:    
 
-![](autocheckin.png)
-
 ```
 <h1 style="background-color: #4382cc; color: #fff; padding: 50px 15px 70px 15px; margin: 0;">
     <img src="https://icon-library.net/images/white-location-icon-png/white-location-icon-png-7.jpg" style="display: block; margin: 10px auto 10px auto" />
@@ -27,3 +25,5 @@ A complete example with styles:
     <p style="font-size: 0.5em;">¡Listo para ir al tee del 1!</p>
 </h1>
 ```
+
+![](autocheckin.png)
