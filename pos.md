@@ -39,9 +39,9 @@ External functions
 This functions depend on other plugins
 
 
-| Command | Args                                        | Description |
-| ------- | ------------------------------------------- | ----------- |
-| exec    | ["billing.newVoucher", idVoucherType]       |             |
-| exec    | ["billing.addTag", "Left handed"]           |             |
-| exec    | ["billing.newMembership", idMembershipType] |             |
-| exec    | ["timetable.newReservation", idReservation] |             |
+| Command | Args                                        | Description                                         |
+| ------- | ------------------------------------------- | --------------------------------------------------- |
+| exec    | ["billing.newVoucher", idVoucherType]       | Create a new voucher                                |
+| exec    | ["billing.addTag", "Left handed"]           | Add a tag to the selected lines                     |
+| exec    | ["billing.newMembership", idMembershipType] | Create a new membership                             |
+| exec    | ["timetable.newReservation", idReservation] | Create a new reservation linked to the selected one |
