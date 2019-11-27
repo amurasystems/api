@@ -41,8 +41,8 @@ This functions depend on other plugins
 
 | Command | Args                                        | Description                                         |
 | ------- | ------------------------------------------- | --------------------------------------------------- |
-| exec    | ["fandb.sendToPrinter"]                     | Food and Beverage: send to kitchen printer          |
-| exec    | ["billing.addTag", "Left handed"]           | Add a tag to the selected lines                     |
+| exec    | ["billing.newVoucher", idVoucherType]       |                                                     |
+| exec    | ["billing.addTag"*, ["Left handed"]*]       | Add a tag to the selected lines.                    |
 | exec    | ["billing.newMembership", idMembershipType] | Create a new membership                             |
 | exec    | ["timetable.newReservation", idReservation] | Create a new reservation linked to the selected one |
-| exec    | ["timetable.newReservation", idReservation] | Create a new reservation linked to the selected one |
+| exec    | ["fandb.sendToPrinter"]                     | Food and Beverage: send to kitchen printer          |
