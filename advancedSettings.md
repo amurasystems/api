@@ -34,6 +34,15 @@ Set saleline dueDate as createDate or useDate by default
 Value: true/false  
 If the system cancels existing tickets when generating an invoice.
 
+**billing.autoSetOnCredit**
+Value: true/false  
+Automatically add a line as on credit when a client has onCredit enabled.
+
+**billing.requirePermissionToUpdatePastSales**
+Value: true/false  
+Require changePastUsedateSales permission to update sales with useDate in the past.
+
+
 **eshop.thankyouPage**
 Value: a url  
 Plugin: consumer  
