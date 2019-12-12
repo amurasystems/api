@@ -539,6 +539,8 @@ Example:
 ```json
 {
     "country": "Spain",
+    "culture": "es-ES",
+    "currency": "EUR",
     "email": "info@golfmanager.com",
     "image": "392416535538319349sA1PFATw5.png",
     "latitude": "40.2269911",

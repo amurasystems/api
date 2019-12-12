@@ -42,10 +42,15 @@ Automatically add a line as on credit when a client has onCredit enabled.
 Value: true/false  
 Require changePastUsedateSales permission to update sales with useDate in the past.
 
-
 **eshop.thankyouPage**
 Value: a url  
 Plugin: consumer  
 The url to redirect to after a successful purchase.  
+
+**selectRowsByPage**
+Value: true/false  
+Plugin: slib
+Public: true
+Select rows all rows int the page versus all rows in the search.
 
 
