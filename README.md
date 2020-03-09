@@ -880,6 +880,7 @@ Method: GET
 | tenant   | string   | yes      | Tenant name                       |
 | start    | datetime | yes      | Start date and time search period |
 | end      | datetime | yes      | End date and time search period   |
+| idClient | int      | no       | Filter reservations by client id  |
 
 Example:
 

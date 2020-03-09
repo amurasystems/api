@@ -46,3 +46,4 @@ This functions depend on other plugins
 | exec    | ["billing.newMembership", idMembershipType] | Create a new membership                             |
 | exec    | ["timetable.newReservation", idReservation] | Create a new reservation linked to the selected one |
 | exec    | ["fandb.sendToPrinter"]                     | Food and Beverage: send to kitchen printer          |
+| exec    | ["fandb.moveLines"]                         | Food and Beverage: move lines to another table      |
