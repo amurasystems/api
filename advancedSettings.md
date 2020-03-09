@@ -53,8 +53,10 @@ Plugin: slib
 Public: true   
 Select rows all rows int the page versus all rows in the search.
 
-**ebookings.membershipClientTag**
-Value: string
+**ebookings.membershipClientTag**  
+Value: string  
 When selecting the player if it shows a list of clients with a tag to pick one or a just a text box.
+
+
 
 
