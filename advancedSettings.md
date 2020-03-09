@@ -55,7 +55,7 @@ Select rows all rows int the page versus all rows in the search.
 
 **ebookings.membershipClientTag**  
 Value: string  
-When selecting the player if it shows a list of clients with a tag to pick one or a just a text box.
+Show a list of clients (with that tag) to pick one or a just a text box to enter free form text.
 
 
 
