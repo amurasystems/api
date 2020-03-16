@@ -30,24 +30,24 @@ Prevent changing past sales (past refers to useDate)
 Value: true/false              
 Set saleline dueDate as createDate or useDate by default
 
-**billing.cancelInvoiceTickets**  
+**billing.cancelInvoiceTickets**   
 Value: true/false  
 If the system cancels existing tickets when generating an invoice.
 
-**billing.autoSetOnCredit**
+**billing.autoSetOnCredit**  
 Value: true/false  
 Automatically add a line as on credit when a client has onCredit enabled.
 
-**billing.requirePermissionToUpdatePastSales**
+**billing.requirePermissionToUpdatePastSales**  
 Value: true/false  
 Require changePastUsedateSales permission to update sales with useDate in the past.
 
-**eshop.thankyouPage**
+**eshop.thankyouPage**  
 Value: a url  
 Plugin: consumer  
 The url to redirect to after a successful purchase.  
 
-**selectRowsByPage**
+**selectRowsByPage**  
 Value: true/false   
 Plugin: slib   
 Public: true   
